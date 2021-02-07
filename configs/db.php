@@ -3,7 +3,7 @@
 define('HOST', 'localhost');
 define('USERNAME', 'root');
 define('PASSWORD', '');
-define('DB_NAME', 'learn');
+define('DB_NAME', 'blog');
 
 return [
     'host' => HOST,

@@ -6,12 +6,16 @@ class Controller
 {
     public function index()
     {
-        $books = Model\Book::all();
-        return new View('index', ['title' => 'Index Page', 'books' => $books]);
+        $notes = Model\Note::all();
+        return new View('index', ['title' => 'Список статей', 'notes' => $notes]);
     }
 
-    public function about()
+    public function noteRead($id)
     {
-        return 'about';
+        $note = Model\Note::where('id', $id)->first();
+        if (!$note) {
+            throw new Exception\NotFoundException();
+        }
+        return $note->title;
     }
 }

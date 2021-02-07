@@ -2,10 +2,13 @@
 
 <div class="container">
     <h1><?= $title; ?></h1>
-    Список книг:
     <ul class="list-group">
-        <?php foreach ($books as $book) : ?>
-            <li class="list-group-item">"<?= $book->title; ?>", Автор: <?= $book->author; ?></li>
+        <?php foreach ($notes as $note) : ?>
+            <li class="list-group-item">
+                <h3><a href="/notes/<?= $note->id ?>"><?= $note->title; ?></a></h3>
+                <p> <?= mb_strimwidth($note->body, 0, 100, '...') ?> </p>
+                <p>Создан: <?= $note->create_time ?></p>
+            </li>
         <?php endforeach ?>
     </ul>
 </div>
