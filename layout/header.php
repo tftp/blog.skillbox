@@ -1,1 +1,1 @@
-<?php include 'base/header.php' ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/base/header.php' ?>

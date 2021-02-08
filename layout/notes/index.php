@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/header.php'; ?>
 
 <div class="container">
     <h1><?= $title; ?></h1>
@@ -13,4 +13,4 @@
     </ul>
 </div>
 
-<?php include 'footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/footer.php'; ?>
