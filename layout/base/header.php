@@ -14,7 +14,7 @@
       <h1><a href="/">Мой блог</a></h1>
         <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Войти</a>
+            <a class="nav-link active" href="/authorization">Войти</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/registration">Зарегистрироваться</a>

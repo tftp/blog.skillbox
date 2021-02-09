@@ -24,4 +24,9 @@ class Controller
     {
         return new View('registration', ['title' => 'Регистрация пользователя']);
     }
+
+    public function authorization()
+    {
+        return new View('authorization', ['title' => 'Авторизация пользователя']);
+    }
 }

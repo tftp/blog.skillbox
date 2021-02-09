@@ -12,9 +12,10 @@ use App\Controller;
 
 $router = new Router();
 
-$router->addRoute(new Route('GET', '/registration', Controller::class . '@registration'));
 $router->addRoute(new Route('GET', '/', Controller::class . '@index'));
 $router->addRoute(new Route('GET', '/notes/*', Controller::class . '@noteRead'));
+$router->addRoute(new Route('GET', '/registration', Controller::class . '@registration'));
+$router->addRoute(new Route('GET', '/authorization', Controller::class . '@authorization'));
 $router->addRoute(new Route('GET', '/test/*/test2/*', function ($param1, $param2) {
     echo "Test page with param = $param1 and $param2";
 }));
