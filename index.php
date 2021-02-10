@@ -9,13 +9,17 @@ use App\Route;
 use App\Router;
 use App\Application;
 use App\Controller;
+use App\SessionController;
 
 $router = new Router();
 
 $router->addRoute(new Route('GET', '/', Controller::class . '@index'));
 $router->addRoute(new Route('GET', '/notes/*', Controller::class . '@noteRead'));
-$router->addRoute(new Route('GET', '/registration', Controller::class . '@registration'));
-$router->addRoute(new Route('GET', '/authorization', Controller::class . '@authorization'));
+$router->addRoute(new Route('GET', '/registration', Controller::class . '@registrationPage'));
+$router->addRoute(new Route('POST', '/registration', Controller::class . '@userAdd'));
+$router->addRoute(new Route('GET', '/authorization', Controller::class . '@authorizationPage'));
+$router->addRoute(new Route('POST', '/authorization', Controller::class . '@authorization'));
+$router->addRoute(new Route('GET', '/exit', Controller::class . '@closeSession'));
 $router->addRoute(new Route('GET', '/test/*/test2/*', function ($param1, $param2) {
     echo "Test page with param = $param1 and $param2";
 }));

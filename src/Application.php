@@ -40,6 +40,7 @@ class Application
             $message = $e->getMessage();
             $code = $e->getCode();
 
+            http_response_code(500);
             echo $message . PHP_EOL;
             echo "Код ошибки " . ($code ? $code : "500") . PHP_EOL;
         }
