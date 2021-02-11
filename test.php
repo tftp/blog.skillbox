@@ -24,6 +24,8 @@ $url2 = '/test/dd2/tt/dd222';
 $difs = preg_match('/^' . str_replace(['*', '/'], ['\w+', '\/'], $url1) . '$/', $url2);
 var_dump($url1, $url2, $difs);
 
+echo password_hash('password', PASSWORD_DEFAULT);
+
 function checkUri($url1, $url2) {
     $arr1 = explode('/', $url1);
     $arr2 = explode('/', $url2);

@@ -41,9 +41,40 @@ class UserController extends PrivateController
 
     public function update($id)
     {
-        var_dump($_FILES);
-        echo $_POST['text'];
-        return $id;
+        if (!isSession()) {
+            throw new \App\Exception\NotFoundException();
+        }
+
+        $validateFileResult = [];
+        $user = \App\Model\User::find($id);
+
+        // echo '<pre>';
+        // var_dump($user);
+        // echo '</pre>';
+
+        if (!empty($_FILES['user-avatar']['name'])) {
+            $validateFileResult = validateFile($_FILES['user-avatar']);
+        }
+
+        if (isset($validateFileResult['errors'])) {
+            throw new \App\Exception\UpdateUserException(implode(' ', $validateFileResult['errors']));
+        }
+
+        if (isset($validateFileResult['img_src'])) {
+            $user->avatar = $validateFileResult['img_src'];
+        }
+
+        if (isset($_POST['text'])) {
+            $text = strip_tags($_POST['text']);
+            $text = substr($text, 0, 255);
+            $user->annotation = $text;
+        }
+
+        $result = $user->save();
+        if ($result) {
+            $_SESSION['user'] = $user;
+        }
+        return new \App\View('users.show', ['title' => "Профиль {$_SESSION['user']->name}"]);
     }
 
     public function registrationGet()
@@ -64,6 +95,8 @@ class UserController extends PrivateController
         $user = \App\Model\User::where('email', $email)->first();
 
         if ($user && password_verify($password, $user->password)) {
+            $subscribe = \App\Model\Subscriber::where('email', $user->email)->first();
+            $_SESSION['subscribe'] = $subscribe ? 1 : 0;
             $_SESSION['user'] = $user;
             $_SESSION['success'] = true;
             header("Location: /");

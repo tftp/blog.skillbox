@@ -10,6 +10,7 @@ use App\Router;
 use App\Application;
 use App\Controller\UserController;
 use App\Controller\NoteController;
+use App\Controller\SubscribeController;
 
 $router = new Router();
 
@@ -23,6 +24,8 @@ $router->addRoute(new Route('POST', '/registration', UserController::class . '@n
 $router->addRoute(new Route('GET', '/authorization', UserController::class . '@authorizationGet'));
 $router->addRoute(new Route('POST', '/authorization', UserController::class . '@authorizationPost'));
 $router->addRoute(new Route('GET', '/exit', UserController::class . '@closeSession'));
+
+$router->addRoute(new Route('POST', '/subscribe/update', SubscribeController::class . '@update'));
 
 $router->addRoute(new Route('GET', '/test/*/test2/*', function ($param1, $param2) {
     echo "Test page with param = $param1 and $param2";

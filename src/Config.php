@@ -14,6 +14,7 @@ final class Config
         if (null === static::$instance) {
             static::$instance = new static();
             static::$instance->set('db', require $_SERVER['DOCUMENT_ROOT'] . '/configs/db.php');
+            static::$instance->set('general', require $_SERVER['DOCUMENT_ROOT'] . '/configs/general.php');
         }
 
         return static::$instance;
