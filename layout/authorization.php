@@ -1,7 +1,7 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/header.php'; ?>
 <h2 align="center"><?= $title; ?></h2>
 
-<div class="container-fluid">
+<div class="container-fluid py-3">
     <div class="row justify-content-center">
     <!-- <div class="col-md-4"> -->
         <?php if (isSession()) {?>

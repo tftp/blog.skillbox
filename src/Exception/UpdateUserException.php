@@ -17,7 +17,5 @@ class UpdateUserException extends HttpException implements \App\Renderable
         $data = ['error' => "Ошибка сохранения: $this->message", 'title' => 'Ошибка сохранения'];
 
         includeView($template, $data);
-
-        // return "Ошибка авторизации. Неверен логин или пароль" . PHP_EOL;
     }
 }

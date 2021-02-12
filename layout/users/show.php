@@ -6,6 +6,7 @@
 <?php endif; ?>
 
 <form  method="post" enctype="multipart/form-data">
+<div class="container py-3">
 <div class="row">
   <div class="col-sm-2">
     <div class="card">
@@ -46,7 +47,8 @@
 </div>
 <div class="row justify-content-end">
     <div class="col-sm-8">
-        <button type="submit" class="btn btn-primary btn-save" hidden>Сохранить данные</button>
+        <button type="submit" class="btn btn-primary btn-save my-2" hidden>Сохранить данные</button>
+</div>
 </div>
 </div>
 </form>

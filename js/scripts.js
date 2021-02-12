@@ -6,8 +6,24 @@
   const btnSave = document.querySelector('.btn-save');
   const textAreaDiv = document.querySelector('.text-area-div');
   const textArea = document.querySelector('.text-area');
-  const textAreaMute = document.querySelector('.text-muted');
+  const textMute = document.querySelector('.text-muted');
   const btnSubscribe = document.querySelector('.btn-subscribe');
+  const formSubscribe = document.querySelector('.form-subscribe');
+
+  if(formSubscribe) {
+      const btnSubscribeMain = document.querySelector('.btn-subscribe-main');
+
+      btnSubscribeMain.addEventListener('click', evt => {
+        evt.preventDefault();
+
+        let form = new FormData(formSubscribe);
+        let url = '/subscribe/update';
+
+        sendRequest(url, form).then((result) => {
+          textMute.innerText = result;
+        });
+      });
+  }
 
   if(btnSubscribe) {
     btnSubscribe.addEventListener('click', evt => {

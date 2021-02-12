@@ -1,14 +1,14 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/base/header.php' ?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light my-0 border-bottom">
 <!-- <div class="collapse navbar-collapse"> -->
 <a class="navbar-brand" href="/">Мой блог</a>
 
 <ul class="nav mr-auto">
   <li class="nav-item">
-      <?php if (isSession()) : ?>
-    <a class="nav-link active" href="/users/<?= $_SESSION['user']->id; ?>">Мой профиль</a>
-<?php endif; ?>
+    <?php if (isSession()) : ?>
+        <a class="nav-link active" href="/users/<?= $_SESSION['user']->id; ?>">Мой профиль</a>
+    <?php endif; ?>
   </li>
 </ul>
 
@@ -31,4 +31,4 @@
 
 <!-- </div> -->
 </nav>
-<hr>
+<!-- <hr> -->

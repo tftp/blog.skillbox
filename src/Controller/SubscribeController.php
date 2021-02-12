@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use \App\Model\Subscriber;
+
 class SubscribeController extends PrivateController
 {
     public function update()
@@ -10,37 +12,40 @@ class SubscribeController extends PrivateController
 
         if (isset($_POST['email'])) {
 
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 $result = "Email указан неверно. ";
                 echo json_encode($result);
+                return;
             }
 
-            $subscribe = \App\Model\Subscriber::where('email', $_POST['email'])->first();
+            $subscribe = Subscriber::where('email', $_POST['email'])->first();
 
             if ($subscribe) {
                 $result = "Вы уже подписаны. ";
                 echo json_encode($result);
+                return;
             } else {
-                $subscribe->email = $_POST['email'];
-                $subscribe->save();
+                Subscriber::insert(['email' => $_POST['email']]);
                 $result = "Вы успешно подписаны. ";
                 echo json_encode($result);
+                return;
             }
         }
         if (isSession()) {
             $user = $_SESSION['user'];
-            $subscribe = \App\Model\Subscriber::where('email', $user->email)->first();
+            $subscribe = Subscriber::where('email', $user->email)->first();
 
             if ($subscribe) {
-                \App\Model\Subscriber::where('email', $user->email)->delete();
+                Subscriber::where('email', $user->email)->delete();
                 $result = 0;
             } else {
-                \App\Model\Subscriber::insert(['email' => $user->email]);
+                Subscriber::insert(['email' => $user->email]);
                 $result = 1;
             }
 
             $_SESSION['subscribe'] = $result;
             echo json_encode($result);
+            return;
         }
     }
 }
