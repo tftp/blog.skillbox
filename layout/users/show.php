@@ -6,11 +6,11 @@
 <?php endif; ?>
 
 <form  method="post" enctype="multipart/form-data">
-<div class="container py-3">
+<div class="container py-3 px-0">
 <div class="row">
   <div class="col-sm-2">
-    <div class="card">
-        <img class="card-img-top" width="100" src="<?= $_SESSION['user']->avatar ? '/images/' . $_SESSION['user']->avatar : '/images/noname-avatar.png' ?>" alt="Ваше фото">
+    <div class="card text-center">
+        <img class="card-img-top" src="<?= $_SESSION['user']->avatar ? '/images/' . $_SESSION['user']->avatar : '/images/noname-avatar.png' ?>" alt="Ваше фото">
       <div class="card-body">
           <input type="file" name="user-avatar" accept="image/gif, image/jpeg, image/png" id="user-avatar" hidden  value=<?= $_SERVER['DOCUMENT_ROOT'] . '/images/noname-avatar.png' ?>>
           <a href="#" id="click-user-avatar" class="card-link">Изменить аватар</a>

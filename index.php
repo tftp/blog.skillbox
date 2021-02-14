@@ -15,12 +15,14 @@ use App\Controller\SubscribeController;
 $router = new Router();
 
 $router->addRoute(new Route('GET', '/', NoteController::class . '@index'));
-$router->addRoute(new Route('GET', '/notes/*', NoteController::class . '@show'));
+$router->addRoute(new Route('GET', '/notes/new', NoteController::class . '@new'));
+$router->addRoute(new Route('POST', '/notes/new', NoteController::class . '@create'));
+$router->addRoute(new Route('GET', '/notes/note/*', NoteController::class . '@show'));
 
 $router->addRoute(new Route('GET', '/registration', UserController::class . '@registrationGet'));
 $router->addRoute(new Route('GET', '/users/*', UserController::class . '@show'));
 $router->addRoute(new Route('POST', '/users/*', UserController::class . '@update'));
-$router->addRoute(new Route('POST', '/registration', UserController::class . '@new'));
+$router->addRoute(new Route('POST', '/registration', UserController::class . '@create'));
 $router->addRoute(new Route('GET', '/authorization', UserController::class . '@authorizationGet'));
 $router->addRoute(new Route('POST', '/authorization', UserController::class . '@authorizationPost'));
 $router->addRoute(new Route('GET', '/exit', UserController::class . '@closeSession'));

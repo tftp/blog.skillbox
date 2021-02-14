@@ -2,21 +2,75 @@
 
 namespace App\Controller;
 
+use \App\Model\Note;
+use \App\View;
+use \App\Config;
+
 class NoteController extends PrivateController
 {
     public function index()
     {
-        $notes = \App\Model\Note::all();
-        return new \App\View('notes.index', ['title' => 'Список статей', 'notes' => $notes]);
+        $notes = Note::all();
+        return new View('notes.index', ['title' => 'Список статей', 'notes' => $notes]);
     }
 
     public function show($id)
     {
-        $note = \App\Model\Note::where('id', $id)->first();
+        $note = Note::where('id', $id)->first();
         if (!$note) {
             throw new \App\Exception\NotFoundException();
         }
-        return new \App\View('notes.show', ['note' => $note]);
-        return $note->title;
+        return new View('notes.show', ['note' => $note, 'title' => $note->title]);
+        // return $note->title;
+    }
+
+    public function new()
+    {
+        $config = Config::getInstance();
+
+        if (isSession() && $_SESSION['user']->role !== $config->get('general.role.roleUser')) {
+            return new View('notes.new', ['title' => 'Новая статья']);
+        } else {
+            throw new \App\Exception\ForbiddenException();
+        }
+    }
+
+    public function create()
+    {
+        $config = Config::getInstance();
+
+        if (isSession() && $_SESSION['user']->role !== $config->get('general.role.roleUser')) {
+            $error = validateNoteData();
+
+            if ($error) {
+                throw new \App\Exception\UpdateNoteException($error);
+            }
+
+            $fileUploadResult = validateFile($_FILES['image-note']);
+
+            if ($fileUploadResult['errors']) {
+                $error = implode(' ', $fileUploadResult['errors']);
+                throw new \App\Exception\UpdateNoteException($error);
+            }
+
+            $title = trim(strip_tags($_POST['title']));
+            $body = trim(strip_tags($_POST['body']));
+            $image = $fileUploadResult['img_src'];
+
+            try {
+                $id = Note::insertGetId([
+                    'title' => $title,
+                    'body' => $body,
+                    'image' => $image
+                ]);
+            } catch (\Exception $e) {
+                throw new \App\Exception\UpdateNoteException("Не получается создать статью.");
+            }
+
+            header("Location: /notes/note/$id");
+
+        } else {
+            throw new \App\Exception\ForbiddenException();
+        }
     }
 }

@@ -9,6 +9,26 @@
   const textMute = document.querySelector('.text-muted');
   const btnSubscribe = document.querySelector('.btn-subscribe');
   const formSubscribe = document.querySelector('.form-subscribe');
+  const imgNoteNew = document.querySelector('.img-note-new');
+
+  if(imgNoteNew) {
+    const imgInput = document.querySelector('#imgInput');
+
+    imgNoteNew.addEventListener('click', evt => {
+      imgInput.click();
+    });
+
+    imgInput.addEventListener('change', evt => {
+      let file = evt.target.files[0];
+      let reader = new FileReader;
+
+      reader.onload = (evt) => {
+        imgNoteNew.src = evt.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
 
   if(formSubscribe) {
       const btnSubscribeMain = document.querySelector('.btn-subscribe-main');

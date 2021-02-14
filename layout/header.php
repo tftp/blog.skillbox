@@ -5,11 +5,16 @@
 <a class="navbar-brand" href="/">Мой блог</a>
 
 <ul class="nav mr-auto">
-  <li class="nav-item">
-    <?php if (isSession()) : ?>
-        <a class="nav-link active" href="/users/<?= $_SESSION['user']->id; ?>">Мой профиль</a>
-    <?php endif; ?>
-  </li>
+    <li class="nav-item">
+        <?php if (isSession()) : ?>
+            <a class="nav-link active" href="/users/<?= $_SESSION['user']->id; ?>">Мой профиль</a>
+        <?php endif; ?>
+    </li>
+    <?php if (isSession() && $_SESSION['user']->role) : ?>
+        <li class="nav-item">
+            <a class="nav-link active <?= $title == 'Новая статья' ? 'disabled' : '' ?>" href="/notes/new">Новая статья</a>
+        </li>
+    <?php endif ?>
 </ul>
 
 <ul class="nav justify-content-end">

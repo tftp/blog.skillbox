@@ -64,8 +64,14 @@ function validateRegistrationData() {
 
 function validateFile($file) {
     $result = [];
+    $config = \App\Config::getInstance();
+    $uploadPath = $config->get('general.path_to.images');
+
+    if (empty($file['name'])) {
+        return $result['img_src'] = null;
+    }
+
     $errors = errorsLoad($file);
-    $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/images/';
 
     if (empty($errors)) {
         $pattern = '/.+\./';
@@ -76,29 +82,43 @@ function validateFile($file) {
         if (!$result['upload']) {
             $result['errors'] = ['Ошибка загрузки на сервер'];
         }
+
     } else {
         $result['errors'] = $errors;
         $result['upload'] = false;
     }
     return $result;
-
 }
 
 function errorsLoad($file) {
     $config = \App\Config::getInstance();
-    $errors = [];
-    $isAllowedType = in_array($file['type'], $config->get('general.allowFileTypes'));
-    $isAllowedSize = $file['size'] / 1024 / 1024 <= $config->get('general.allowedFileSize');
+    $isAllowedType = in_array($file['type'], $config->get('general.image.allowFileTypes'));
+    $isAllowedSize = $file['size'] / 1024 / 1024 <= $config->get('general.image.allowedFileSize');
     $isEmptyErrors = empty($file['error']);
+    $errors = [];
+
+    if (!$isAllowedSize) {
+        $errors[] = "Размер файла должен быть менее {$config->get('general.allowedFileSize')} Мб. ";
+    }
 
     if (!$isAllowedType) {
-        $errors[] = 'Несоответствие типов (разрешенные типы: png, jpg, jpeg)';
+        $errors[] = "Несоответствие типов (разрешенные типы: png, jpg, jpeg). ";
     }
-    if (!$isAllowedSize) {
-        $errors[] = "Размер файла должен быть менее {$config->get('general.allowedFileSize')} Мб";
-    }
+
     if (!$isEmptyErrors) {
-        $errors[] = "Ошибка загрузки {$file['error']}";
+        $errors[] = "Ошибка загрузки {$file['error']} - загрузка невозможна из-за политики сервера. ";
     }
     return $errors;
+}
+
+function validateNoteData() {
+    $error = '';
+    $title = trim(strip_tags($_POST['title']));
+    $body = trim(strip_tags($_POST['body']));
+
+    if (empty($title) || empty($body)) {
+        $error = 'Заголовок или тело статьи не может быть пустым';
+    }
+
+    return $error;
 }

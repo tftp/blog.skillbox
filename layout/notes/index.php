@@ -5,7 +5,7 @@
     <ul class="list-group">
         <?php foreach ($notes as $note) : ?>
             <li class="list-group-item">
-                <h3><a href="/notes/<?= $note->id ?>"><?= $note->title; ?></a></h3>
+                <h3><a href="/notes/note/<?= $note->id ?>"><?= $note->title; ?></a></h3>
                 <p> <?= mb_strimwidth($note->body, 0, 100, '...') ?> </p>
                 <p>Создан: <?= $note->create_time ?></p>
             </li>
