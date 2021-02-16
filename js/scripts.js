@@ -77,7 +77,9 @@
     btnSave.hidden = false;
     checkTextArea();
     });
+  }
 
+  if(textArea) {
     textArea.addEventListener('keydown', checkTextArea);
   }
 

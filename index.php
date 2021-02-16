@@ -9,6 +9,7 @@ use App\Route;
 use App\Router;
 use App\Application;
 use App\Controller\UserController;
+use App\Controller\CommentController;
 use App\Controller\NoteController;
 use App\Controller\SubscribeController;
 
@@ -18,6 +19,7 @@ $router->addRoute(new Route('GET', '/', NoteController::class . '@index'));
 $router->addRoute(new Route('GET', '/notes/new', NoteController::class . '@new'));
 $router->addRoute(new Route('POST', '/notes/new', NoteController::class . '@create'));
 $router->addRoute(new Route('GET', '/notes/note/*', NoteController::class . '@show'));
+$router->addRoute(new Route('POST', '/notes/note/*', CommentController::class . '@create'));
 
 $router->addRoute(new Route('GET', '/registration', UserController::class . '@registrationGet'));
 $router->addRoute(new Route('GET', '/users/*', UserController::class . '@show'));
