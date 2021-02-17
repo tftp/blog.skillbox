@@ -1,13 +1,9 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/header.php'; ?>
-<?php $peace = 0; ?>
 <div class="container py-3">
-    <div class="row justify-content-center">
-        <div class="col-sm-10">
+    <div class="row">
                 <?php foreach ($notes as $note) : ?>
-                    <?php if ($peace == 0) : ?>
-                        <div class="card-deck my-3">
-                    <?php endif ?>
-                    <div class="card">
+                <div class="col-sm-4">
+                    <div class="card ">
                         <img class="card-img-top" src="<?= $note->image ? '/images/' . $note->image : '/images/no-image-note.jpg' ?>">
                         <div class="card-body">
                             <h5 class="card-title"><a href="/notes/note/<?= $note->id ?>" class="card-link"><?= $note->title; ?></a></h5>
@@ -19,20 +15,9 @@
                             </small>
                         </div>
                     </div>
-                    <?php $peace += 1; ?>
-                    <?php if ($peace == 2) : ?>
-                        <?php $peace = 0; ?>
-                        </div>
-                    <?php endif ?>
+                </div>
                 <?php endforeach ?>
-                <?php if ($peace < 3) : ?>
-                    </div>
-                <?php endif ?>
-        </div>
     </div>
-    <!-- <h1><?= $title; ?></h1> -->
-    <ul class="list-group">
-    </ul>
 </div>
 <?php if (!isSession()) : ?>
     <hr>
