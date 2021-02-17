@@ -11,8 +11,16 @@
                 <div class="card-header">Комментарии</div>
                 <div class="card-body">
                     <?php foreach ($comments as $comment) { ?>
-                        <small class="card-text"><?= $comment->name ?>, <?=  date('d-m-Y H:m:s', strtotime($comment->create_time)); ?></small>
-                        <p class='card-text'><?= $comment->body ?></p>
+                        <?php if ($comment->trust || (isSession() && $_SESSION['user']->id == $comment->users_id)) { ?>
+                            <small class="card-text">
+                                <?= $comment->name ?>,
+                                <?=  date('d-m-Y H:m:s', strtotime($comment->create_time)); ?>
+                                <?= $comment->trust ? '' : ' комментарий на модерации' ?>
+                            </small>
+                            <p class='card-text'>
+                                <?= $comment->body ?>
+                            </p>
+                        <?php } ?>
                     <?php } ?>
                 </div>
             </div>

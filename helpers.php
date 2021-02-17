@@ -34,7 +34,7 @@ function isSession() {
 function validateRegistrationData() {
     $name = trim(strip_tags($_POST['name']));
     $email = strip_tags($_POST['email']);
-    $password = strip_tags($_POST['password']);
+    $password = $_POST['password'];
     $conf_password = strip_tags($_POST['conf_password']);
     $terms = $_POST['terms'] ?? null;
     $error = '';
@@ -47,7 +47,7 @@ function validateRegistrationData() {
         $error .= "Email указан неверно. ";
     }
 
-    if (strlen($password < 5)) {
+    if (strlen($password) < 5) {
         $error .= "Пароль должен быть не менее 5 символов. ";
     }
 
