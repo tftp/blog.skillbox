@@ -10,7 +10,7 @@
             <div class="form-group">
                 <label for="imageNote">Добавить картинку</label>
                 <input type="file" name="image-note" id="imgInput" hidden>
-                <img src="/images/no-image-note.jpg" id="imageNote" class="img-fluid img-note-new" width="500" alt="">
+                <img src="/images/no-image-note.png" id="imageNote" class="img-fluid img-note-new" width="500" alt="">
             </div>
             <div class="form-group">
                 <label for="bodyNote">Текст статьи</label>

@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-sm-6">
             <div class="card">
-                <img class="card-img-top" src="<?= $note->image ? '/images/' . $note->image : '/images/no-image-note.jpg' ?>">
+                <img class="card-img-top" src="<?= $note->image ? '/images/' . $note->image : '/images/no-image-note.png' ?>">
                 <div class="card-body">
                     <h5 class="card-title"><?= $note->title ?></h5>
                     <?php foreach ($paragraphs as $paragraph) { ?>
