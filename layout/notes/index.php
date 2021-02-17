@@ -1,15 +1,37 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/header.php'; ?>
-
+<?php $peace = 0; ?>
 <div class="container py-3">
-    <h1><?= $title; ?></h1>
+    <div class="row justify-content-center">
+        <div class="col-sm-10">
+                <?php foreach ($notes as $note) : ?>
+                    <?php if ($peace == 0) : ?>
+                        <div class="card-deck my-3">
+                    <?php endif ?>
+                    <div class="card">
+                        <img class="card-img-top" src="<?= $note->image ? '/images/' . $note->image : '/images/no-image-note.jpg' ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="/notes/note/<?= $note->id ?>" class="card-link"><?= $note->title; ?></a></h5>
+                            <p class="card-text"> <?= mb_strimwidth($note->body, 0, 100, '...') ?> </p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="card-text">
+                                Создан: <?=  date('d-m-Y H:m:s', strtotime($note->create_time)); ?>
+                            </small>
+                        </div>
+                    </div>
+                    <?php $peace += 1; ?>
+                    <?php if ($peace == 2) : ?>
+                        <?php $peace = 0; ?>
+                        </div>
+                    <?php endif ?>
+                <?php endforeach ?>
+                <?php if ($peace < 3) : ?>
+                    </div>
+                <?php endif ?>
+        </div>
+    </div>
+    <!-- <h1><?= $title; ?></h1> -->
     <ul class="list-group">
-        <?php foreach ($notes as $note) : ?>
-            <li class="list-group-item">
-                <h3><a href="/notes/note/<?= $note->id ?>"><?= $note->title; ?></a></h3>
-                <p> <?= mb_strimwidth($note->body, 0, 100, '...') ?> </p>
-                <p>Создан: <?= $note->create_time ?></p>
-            </li>
-        <?php endforeach ?>
     </ul>
 </div>
 <?php if (!isSession()) : ?>
