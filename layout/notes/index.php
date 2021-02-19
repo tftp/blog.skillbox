@@ -18,9 +18,12 @@
                         </div>
                     </div>
                 <?php endforeach ?>
+                
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/pagination.php'; ?>
             </div>
     </div>
 </div>
+
 <?php if (!isSession()) : ?>
     <hr>
     <div class="container py-2">
