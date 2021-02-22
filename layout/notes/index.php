@@ -18,8 +18,9 @@
                         </div>
                     </div>
                 <?php endforeach ?>
-                
-                <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/pagination.php'; ?>
+                <?php if ($countPages > 1) : ?>
+                    <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/pagination.php'; ?>
+                <?php endif ?>
             </div>
     </div>
 </div>
@@ -28,12 +29,12 @@
     <hr>
     <div class="container py-2">
         <div class="row justify-content-center">
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <form class="form-inline form-subscribe">
                   <input class="form-control mr-sm-2 input-subscribe" type="email" name='email' placeholder="Email" required>
                   <button class="btn-primary btn-subscribe-main" type="submit">Подписаться</button>
                 </form>
-                <small class="form-text text-muted">Подпишитесь на появление новых статей</small>
+                <small class="form-text text-muted text-muted-subscribe">Подпишитесь на появление новых статей</small>
             </div>
         </div>
     </div>

@@ -11,12 +11,14 @@ class NoteController extends PrivateController
 {
     public function index()
     {
+        $config = Config::getInstance();
+        $notesOnPage = $config->get('general.notesOnPage');
         $count = Note::all()->count();
-        $lastPage = $count % 3 ? 1 : 0;
-        $countPages = intdiv($count, 3) + $lastPage;
+        $lastPage = $count % $notesOnPage ? 1 : 0;
+        $countPages = intdiv($count, $notesOnPage) + $lastPage;
         $page = isset($_GET['page']) && ((int) $_GET['page']) > 1 && $_GET['page'] <= $countPages ? $_GET['page'] : 1;
 
-        $notes = Note::orderBy('create_time', 'desc')->skip(3 * ($page - 1))->take(3)->get();
+        $notes = Note::orderBy('create_time', 'desc')->skip($notesOnPage * ($page - 1))->take($notesOnPage)->get();
 
         return new View('notes.index', ['title' => 'Список статей', 'notes' => $notes, 'countPages' => $countPages]);
     }

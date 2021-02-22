@@ -12,7 +12,11 @@ define('ROLE_CONTENT_MANAGER', 2);
 // Задаем пути к папкам
 define('IMAGES', $_SERVER['DOCUMENT_ROOT'] . '/images/');
 
+// Количество статей на главной странице
+define('NOTES_ON_PAGE', 3);
+
 return [
+    'notesOnPage' => NOTES_ON_PAGE,
     'image' => [
         'allowFileTypes' => ALLOW_FILE_TYPES,
         'allowedFileSize' => ALLOWED_FILE_SIZE

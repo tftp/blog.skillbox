@@ -6,7 +6,7 @@
   const btnSave = document.querySelector('.btn-save');
   const textAreaDiv = document.querySelector('.text-area-div');
   const textArea = document.querySelector('.text-area');
-  const textMute = document.querySelector('.text-muted');
+  const textMute = document.querySelector('.text-muted-subscribe');
   const btnSubscribe = document.querySelector('.btn-subscribe');
   const formSubscribe = document.querySelector('.form-subscribe');
   const imgNoteNew = document.querySelector('.img-note-new');
