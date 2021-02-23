@@ -19,7 +19,7 @@
 <ul class="nav justify-content-end">
    <li class="nav-item">
        <?php if (isSession()) { ?>
-           <a class="nav-link active" href="/authorization"><?= $_SESSION['user']->email ?></a>
+           <a class="nav-link active" href="/users/<?= $_SESSION['user']->id; ?>"><?= $_SESSION['user']->email ?></a>
        <?php } else { ?>
            <a class="nav-link active" href="/authorization">Войти</a>
        <?php } ?>

@@ -12,9 +12,10 @@
                 <div class="card-body">
                     <?php foreach ($comments as $comment) { ?>
                             <small class="card-text">
+                                <img src="/images/<?= $comment->avatar ?>" class=".img-fluid rounded-circle" style="max-width: 10%">
                                 <?= $comment->name ?>,
                                 <?=  date('d-m-Y H:m:s', strtotime($comment->create_time)); ?>
-                                <?= $comment->trust ? '' : ' комментарий на модерации' ?>
+                                <?= $comment->trust ? '' : "<span class='text-danger'> комментарий на модерации</span>" ?>
                             </small>
                             <p class='card-text'>
                                 <?= $comment->body ?>

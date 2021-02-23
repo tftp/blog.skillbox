@@ -122,3 +122,21 @@ function validateNoteData() {
 
     return $error;
 }
+
+function isModerator() {
+    $config = \App\Config::getInstance();
+
+    return isSession() && $_SESSION['user']->role !== $config->get('general.role.roleUser');
+}
+
+function isAdmin() {
+    $config = \App\Config::getInstance();
+
+    return isSession() && $_SESSION['user']->role == $config->get('general.role.roleAdministrator');
+}
+
+function isAuthorizedUser() {
+    $config = \App\Config::getInstance();
+
+    return isSession() && $_SESSION['user']->role == $config->get('general.role.roleUser');
+}

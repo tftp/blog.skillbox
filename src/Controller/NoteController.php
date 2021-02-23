@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use \App\Model\Note;
-use \App\Model\Comment;
 use \App\View;
 use \App\Config;
 
@@ -25,41 +24,21 @@ class NoteController extends PrivateController
 
     public function show($id)
     {
-        $config = Config::getInstance();
-
         $note = Note::where('id', $id)->first();
         if (!$note) {
             throw new \App\Exception\NotFoundException();
         }
 
-        if (isSession() && $_SESSION['user']->role !== $config->get('general.role.roleUser')) {
-            $comments = Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
-                            ->join('users', 'comments.users_id', '=', 'users.id')
-                            ->select('comments.*', 'users.name')
-                            ->where('comments.notes_id', $id)
-                            ->get();
+        if (isModerator()) {
+            $comments = getCommentsForAdministrator($id);
         }
 
         if (!isSession()) {
-            $comments = Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
-                            ->join('users', 'comments.users_id', '=', 'users.id')
-                            ->select('comments.*', 'users.name')
-                            ->where('comments.notes_id', $id)
-                            ->where('comments.trust', true)
-                            ->get();
+            $comments = getCommentsForNotAuthorizedUser($id);
         }
 
-        if (isSession() && $_SESSION['user']->role == $config->get('general.role.roleUser')) {
-            $comments = Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
-                            ->join('users', 'comments.users_id', '=', 'users.id')
-                            ->select('comments.*', 'users.name')
-                            ->where('comments.notes_id', $id)
-                            ->where(function($query)
-                            {
-                                $query->where('comments.trust', true)
-                                    ->orWhere('comments.users_id', $_SESSION['user']->id);
-                            })
-                            ->get();
+        if (isAuthorizedUser()) {
+            $comments = getCommentsForAuthorizedUser($id);
         }
 
         return new View('notes.show', ['note' => $note, 'comments' => $comments, 'title' => $note->title]);
@@ -67,9 +46,7 @@ class NoteController extends PrivateController
 
     public function new()
     {
-        $config = Config::getInstance();
-
-        if (isSession() && $_SESSION['user']->role !== $config->get('general.role.roleUser')) {
+        if (isModerator()) {
             return new View('notes.new', ['title' => 'Новая статья']);
         } else {
             throw new \App\Exception\ForbiddenException();
@@ -78,9 +55,7 @@ class NoteController extends PrivateController
 
     public function create()
     {
-        $config = Config::getInstance();
-
-        if (isSession() && $_SESSION['user']->role !== $config->get('general.role.roleUser')) {
+        if (isModerator()) {
             $error = validateNoteData();
 
             if ($error) {
