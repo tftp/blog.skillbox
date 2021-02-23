@@ -25,20 +25,44 @@ class NoteController extends PrivateController
 
     public function show($id)
     {
+        $config = Config::getInstance();
+
         $note = Note::where('id', $id)->first();
         if (!$note) {
             throw new \App\Exception\NotFoundException();
         }
 
-        // $comments = Comment::where('notes_id', $note->id)->get();
-        $comments = Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
-                        ->join('users', 'comments.users_id', '=', 'users.id')
-                        ->select('comments.*', 'users.name')
-                        ->where('comments.notes_id', $id)
-                        ->get();
+        if (isSession() && $_SESSION['user']->role !== $config->get('general.role.roleUser')) {
+            $comments = Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
+                            ->join('users', 'comments.users_id', '=', 'users.id')
+                            ->select('comments.*', 'users.name')
+                            ->where('comments.notes_id', $id)
+                            ->get();
+        }
+
+        if (!isSession()) {
+            $comments = Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
+                            ->join('users', 'comments.users_id', '=', 'users.id')
+                            ->select('comments.*', 'users.name')
+                            ->where('comments.notes_id', $id)
+                            ->where('comments.trust', true)
+                            ->get();
+        }
+
+        if (isSession() && $_SESSION['user']->role == $config->get('general.role.roleUser')) {
+            $comments = Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
+                            ->join('users', 'comments.users_id', '=', 'users.id')
+                            ->select('comments.*', 'users.name')
+                            ->where('comments.notes_id', $id)
+                            ->where(function($query)
+                            {
+                                $query->where('comments.trust', true)
+                                    ->orWhere('comments.users_id', $_SESSION['user']->id);
+                            })
+                            ->get();
+        }
 
         return new View('notes.show', ['note' => $note, 'comments' => $comments, 'title' => $note->title]);
-        // return $note->title;
     }
 
     public function new()
