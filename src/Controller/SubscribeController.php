@@ -18,6 +18,12 @@ class SubscribeController extends PrivateController
                 return;
             }
 
+            if (isSession() && $_SESSION['user']->email != $_POST['email']) {
+                $result = "Email указан неверно. ";
+                echo json_encode($result);
+                return;
+            }
+
             $subscribe = Subscriber::where('email', $_POST['email'])->first();
 
             if ($subscribe) {
@@ -27,6 +33,9 @@ class SubscribeController extends PrivateController
             } else {
                 Subscriber::insert(['email' => $_POST['email']]);
                 $result = "Вы успешно подписаны. ";
+                if (isSession()) {
+                    $_SESSION['subscribe'] = 1;
+                }
                 echo json_encode($result);
                 return;
             }

@@ -40,6 +40,9 @@
         let url = '/subscribe/update';
 
         sendRequest(url, form).then((result) => {
+          if(evt.target.dataset.id) {
+            formSubscribe.hidden = true;
+          }
           textMute.innerText = result;
         });
       });

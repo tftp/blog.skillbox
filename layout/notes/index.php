@@ -25,19 +25,8 @@
     </div>
 </div>
 
-<?php if (!isSession()) : ?>
-    <hr>
-    <div class="container py-2">
-        <div class="row justify-content-center">
-            <div class="col-sm-5">
-                <form class="form-inline form-subscribe">
-                  <input class="form-control mr-sm-2 input-subscribe" type="email" name='email' placeholder="Email" required>
-                  <button class="btn-primary btn-subscribe-main" type="submit">Подписаться</button>
-                </form>
-                <small class="form-text text-muted text-muted-subscribe">Подпишитесь на появление новых статей</small>
-            </div>
-        </div>
-    </div>
+<?php if (!isSession() || (isSession() && !$_SESSION['subscribe'])) : ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/subscription.php'; ?>
 <?php endif ?>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/footer.php'; ?>
