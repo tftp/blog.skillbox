@@ -23,10 +23,14 @@ class UserController extends PrivateController
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         $name = strip_tags($_POST['name']);
         $email = strip_tags($_POST['email']);
+        $avatar = 'noname-avatar.png';
 
-        try { User::insert(
-            ['name' => $name, 'email' => $email, 'password' => $password]
-            );
+        try { User::insert([
+                'name' => $name,
+                'email' => $email,
+                'password' => $password,
+                'avatar' => $avatar
+            ]);
         } catch (\Exception $e) {
             throw new \App\Exception\RegistrateException("Невозможно создать пользователя. Такой Email или Имя уже встречается.");
         }

@@ -10,9 +10,9 @@
 <div class="row">
   <div class="col-sm-2">
     <div class="card text-center">
-        <img class="card-img-top" src="<?= $_SESSION['user']->avatar ? '/images/' . $_SESSION['user']->avatar : '/images/noname-avatar.png' ?>" alt="Ваше фото">
+        <img class="card-img-top" src="<?= '/images/' . $_SESSION['user']->avatar ?>" alt="Ваше фото">
       <div class="card-body">
-          <input type="file" name="user-avatar" accept="image/gif, image/jpeg, image/png" id="user-avatar" hidden  value=<?= $_SERVER['DOCUMENT_ROOT'] . '/images/noname-avatar.png' ?>>
+          <input type="file" name="user-avatar" accept="image/gif, image/jpeg, image/png" id="user-avatar" hidden ?>>
           <a href="#" id="click-user-avatar" class="card-link">Изменить аватар</a>
       </div>
     </div>
