@@ -12,7 +12,7 @@
     <div class="card text-center">
         <img class="card-img-top" src="<?= '/images/' . $_SESSION['user']->avatar ?>" alt="Ваше фото">
       <div class="card-body">
-          <input type="file" name="user-avatar" accept="image/gif, image/jpeg, image/png" id="user-avatar" hidden ?>>
+          <input type="file" name="user-avatar" accept="image/gif, image/jpeg, image/png" id="user-avatar" hidden>
           <a href="#" id="click-user-avatar" class="card-link">Изменить аватар</a>
       </div>
     </div>

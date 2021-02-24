@@ -17,7 +17,7 @@ class UserController extends PrivateController
         $error = validateRegistrationData();
 
         if ($error) {
-            throw new \App\Exception\RegistrateException($error);
+            return new View('registration', ['title' => 'Регистрация пользователя', 'error' => $error]);
         }
 
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
@@ -25,17 +25,21 @@ class UserController extends PrivateController
         $email = strip_tags($_POST['email']);
         $avatar = 'noname-avatar.png';
 
-        try { User::insert([
+        try { $id = User::insertGetId([
                 'name' => $name,
                 'email' => $email,
                 'password' => $password,
                 'avatar' => $avatar
             ]);
         } catch (\Exception $e) {
-            throw new \App\Exception\RegistrateException("Невозможно создать пользователя. Такой Email или Имя уже встречается.");
+            throw new \App\Exception\RegistrateException();
         }
 
-        return new View('registration', ['title' => 'Регистрация пользователя', 'success' => 'Регистрация прошла успешно. Вы можете войти на сайт.']);
+        $user = User::find($id);
+
+        authorizeUser($user);
+
+        header("Location: /");
     }
 
     public function show($id)
@@ -53,18 +57,19 @@ class UserController extends PrivateController
             throw new \App\Exception\NotFoundException();
         }
 
+        if ($_SESSION['user']->id != $id) {
+            throw new \App\Exception\ForbiddenException();
+        }
+
         $validateFileResult = [];
         $user = User::find($id);
-
-        // echo '<pre>';
-        // var_dump($user);
-        // echo '</pre>';
 
         $fileUploadResult = validateFile($_FILES['user-avatar']);
 
         if (isset($fileUploadResult['errors'])) {
             $error = implode(' ', $fileUploadResult['errors']);
-            throw new \App\Exception\UpdateUserException($error);
+            return new View('users.show', ['title' => "Ошибка изменения", 'error' => $error]);
+            // throw new \App\Exception\UpdateUserException($error);
         }
 
         if (isset($fileUploadResult['img_src'])) {
@@ -102,10 +107,8 @@ class UserController extends PrivateController
         $user = User::where('email', $email)->first();
 
         if ($user && password_verify($password, $user->password)) {
-            $subscribe = Subscriber::where('email', $user->email)->first();
-            $_SESSION['subscribe'] = $subscribe ? 1 : 0;
-            $_SESSION['user'] = $user;
-            $_SESSION['success'] = true;
+            authorizeUser($user);
+
             header("Location: /");
         } else {
             throw new \App\Exception\AuthorizeException();

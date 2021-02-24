@@ -35,7 +35,7 @@ function validateRegistrationData() {
     $name = trim(strip_tags($_POST['name']));
     $email = strip_tags($_POST['email']);
     $password = $_POST['password'];
-    $conf_password = strip_tags($_POST['conf_password']);
+    $conf_password = $_POST['conf_password'];
     $terms = $_POST['terms'] ?? null;
     $error = '';
 
@@ -139,4 +139,11 @@ function isAuthorizedUser() {
     $config = \App\Config::getInstance();
 
     return isSession() && $_SESSION['user']->role == $config->get('general.role.roleUser');
+}
+
+function authorizeUser(\App\Model\User $user) {
+    $subscribe = \App\Model\Subscriber::where('email', $user->email)->first();
+    $_SESSION['subscribe'] = $subscribe ? 1 : 0;
+    $_SESSION['user'] = $user;
+    $_SESSION['success'] = true;
 }
