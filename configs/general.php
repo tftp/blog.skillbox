@@ -9,9 +9,6 @@ define('ROLE_USER', 0);
 define('ROLE_ADMINISTRATOR', 1);
 define('ROLE_CONTENT_MANAGER', 2);
 
-// Задаем пути к папкам
-define('IMAGES', $_SERVER['DOCUMENT_ROOT'] . '/images/');
-
 // Количество статей на главной странице
 define('NOTES_ON_PAGE', 3);
 
@@ -25,8 +22,5 @@ return [
         'roleUser' => ROLE_USER,
         'roleAdministrator' => ROLE_ADMINISTRATOR,
         'roleContentManager' => ROLE_CONTENT_MANAGER,
-    ],
-    'path_to' => [
-        'images' => IMAGES
     ]
 ];

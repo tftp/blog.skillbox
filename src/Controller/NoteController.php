@@ -72,7 +72,7 @@ class NoteController extends PrivateController
 
             $title = trim(strip_tags($_POST['title']));
             $body = trim(strip_tags($_POST['body']));
-            $image = $fileUploadResult['img_src'];
+            $image = $fileUploadResult['img_src'] ?? 'no-image-note.png';
 
             $id = Note::insertGetId([
                 'title' => $title,

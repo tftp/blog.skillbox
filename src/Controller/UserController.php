@@ -63,7 +63,7 @@ class UserController extends PrivateController
 
         $validateFileResult = [];
         $user = User::find($id);
-
+        
         $fileUploadResult = validateFile($_FILES['user-avatar']);
 
         if (isset($fileUploadResult['errors'])) {

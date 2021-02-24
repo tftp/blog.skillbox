@@ -67,7 +67,7 @@ function validateFile($file) {
     $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/images/';
 
     if (empty($file['name'])) {
-        $result['img_src'] = "no-image-note.png";
+        $result['img_src'] = null;
         return $result;
     };
 

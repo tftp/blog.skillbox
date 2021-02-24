@@ -5,14 +5,11 @@ namespace App\Controller;
 use \App\Model\Comment;
 use \App\Model\Note;
 use \App\View;
-// use \App\Config;
 
 class CommentController extends PrivateController
 {
     public function create($id)
     {
-        // $config = Config::getInstance();
-
         $note = Note::where('id', $id)->first();
 
         $error = null;

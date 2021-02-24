@@ -2,10 +2,15 @@
 <div class="container py-3">
     <div class="row justify-content-center">
         <div class="col-sm-10">
+            <?php if (count($notes) == 0) : ?>
+                <div class="alert alert-success text-center" role="alert" >
+                    Ни одной статьи пока нет, но они обязательно появятся.
+                </div>
+            <?php endif ?>
                 <?php foreach ($notes as $note) : ?>
                     <div class="card-group my-3 ">
                         <div class="card border-light" style="max-width: 20rem;">
-                            <img class="card-img" src="<?= $note->image ? '/images/' . $note->image : '/images/no-image-note.png' ?>">
+                            <img class="card-img" src="/images/<?= $note->image ?>">
                         </div>
                         <div class="card border-light">
                             <div class="card-body">
