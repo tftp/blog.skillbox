@@ -59,29 +59,26 @@ class NoteController extends PrivateController
             $error = validateNoteData();
 
             if ($error) {
-                throw new \App\Exception\UpdateNoteException($error);
+                return new View('notes.new', ['error' => $error, 'title' => 'Ошибка сохранения']);
             }
 
             $fileUploadResult = validateFile($_FILES['image-note']);
 
-            if ($fileUploadResult['errors']) {
+            if (isset($fileUploadResult['errors'])) {
                 $error = implode(' ', $fileUploadResult['errors']);
-                throw new \App\Exception\UpdateNoteException($error);
+
+                return new View('notes.new', ['error' => $error, 'title' => 'Ошибка сохранения']);
             }
 
             $title = trim(strip_tags($_POST['title']));
             $body = trim(strip_tags($_POST['body']));
             $image = $fileUploadResult['img_src'];
 
-            try {
-                $id = Note::insertGetId([
-                    'title' => $title,
-                    'body' => $body,
-                    'image' => $image
-                ]);
-            } catch (\Exception $e) {
-                throw new \App\Exception\UpdateNoteException("Не получается создать статью.");
-            }
+            $id = Note::insertGetId([
+                'title' => $title,
+                'body' => $body,
+                'image' => $image
+            ]);
 
             header("Location: /notes/note/$id");
 

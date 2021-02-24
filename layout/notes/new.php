@@ -2,14 +2,19 @@
 
 <div class="container m-3">
     <div class="col-sm-6">
+        <?php if (isset($error)) : ?>
+            <div class="alert alert-danger" role="alert" >
+                <?= $error ?>
+            </div>
+        <?php endif; ?>
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="titleNote">Заголовок статьи</label>
-                <input type="text" name="title" id="titleNote" class="form-control" required>
+                <input type="text" name="title" id="titleNote" class="form-control" value="<?= strip_tags($_POST['title'] ?? '') ?>" required>
             </div>
             <div class="form-group">
                 <label for="imageNote">Добавить картинку</label>
-                <input type="file" name="image-note" id="imgInput" hidden>
+                <input type="file" name="image-note" id="imgInput" accept="image/gif, image/jpeg, image/png" hidden>
                 <img src="/images/no-image-note.png" id="imageNote" class="img-fluid img-note-new" width="500" alt="">
             </div>
             <div class="form-group">

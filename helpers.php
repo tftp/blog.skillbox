@@ -64,12 +64,12 @@ function validateRegistrationData() {
 
 function validateFile($file) {
     $result = [];
-    $config = \App\Config::getInstance();
-    $uploadPath = $config->get('general.path_to.images');
+    $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/images/';
 
     if (empty($file['name'])) {
-        return $result['img_src'] = null;
-    }
+        $result['img_src'] = "no-image-note.png";
+        return $result;
+    };
 
     $errors = errorsLoad($file);
 
@@ -101,7 +101,7 @@ function errorsLoad($file) {
         $errors[] = "Размер файла должен быть менее {$config->get('general.allowedFileSize')} Мб. ";
     }
 
-    if (!$isAllowedType) {
+    if (!empty($file['type']) && !$isAllowedType) {
         $errors[] = "Несоответствие типов (разрешенные типы: png, jpg, jpeg). ";
     }
 
