@@ -12,6 +12,7 @@ use App\Controller\UserController;
 use App\Controller\CommentController;
 use App\Controller\NoteController;
 use App\Controller\SubscribeController;
+use App\Controller\StaticPageController;
 
 $router = new Router();
 
@@ -31,9 +32,7 @@ $router->addRoute(new Route('GET', '/exit', UserController::class . '@closeSessi
 
 $router->addRoute(new Route('POST', '/subscribe/update', SubscribeController::class . '@update'));
 
-$router->addRoute(new Route('GET', '/test/*/test2/*', function ($param1, $param2) {
-    echo "Test page with param = $param1 and $param2";
-}));
+$router->addRoute(new Route('GET', '/static/*', StaticPageController::class . '@show'));
 
 $application = new Application($router);
 

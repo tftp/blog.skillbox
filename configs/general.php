@@ -13,6 +13,7 @@ define('ROLE_CONTENT_MANAGER', 2);
 define('NOTES_ON_PAGE', 3);
 
 return [
+    'terms' => file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/terms'),
     'notesOnPage' => NOTES_ON_PAGE,
     'image' => [
         'allowFileTypes' => ALLOW_FILE_TYPES,

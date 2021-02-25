@@ -42,9 +42,10 @@
         </div>
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="check" name="terms" >
-            <label class="form-check-label" for="check">согласен с правилами сайта</label>
+            <label class="form-check-label" for="check">согласен с <a href="/static/terms" class="card-link">правилами</a> сайта</label>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
+          <small class="form-text text-muted">Уже зарегистрирован? <a href="/authorization" class="card-link">Авторизуйся.</a></small>
         </form>
     </div>
     <?php } ?>

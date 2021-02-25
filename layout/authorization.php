@@ -27,7 +27,7 @@
                 <input type="password" class="form-control" id="inputPass" placeholder="Password" name="password" required>
             </div>
             <div class="form-group">
-                <p><a href="/registration">Зарегистрируйтесь</a>, если вы не зарегистрированны.</p>
+                <small class="form-text text-muted">Нет регистрации? <a href="/registration" class="card-link">Зарегистрируйся.</a></small>
             </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
