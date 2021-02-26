@@ -147,3 +147,12 @@ function authorizeUser(\App\Model\User $user) {
     $_SESSION['user'] = $user;
     $_SESSION['success'] = true;
 }
+
+function getBodyMail($title, $body, $id) {
+    $bodyMail = "На сайте добавлена новая запись: $title" . PHP_EOL;
+    $bodyMail .= "Новая статья: $title" . PHP_EOL;
+    $bodyMail .= mb_strimwidth($body, 0, 100, '...') . PHP_EOL;
+    $bodyMail .= "Читать " . $_SERVER['HTTP_HOST'] . "/notes/note/$id" . PHP_EOL;
+
+    return $bodyMail;
+}

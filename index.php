@@ -31,6 +31,7 @@ $router->addRoute(new Route('POST', '/authorization', UserController::class . '@
 $router->addRoute(new Route('GET', '/exit', UserController::class . '@closeSession'));
 
 $router->addRoute(new Route('POST', '/subscribe/update', SubscribeController::class . '@update'));
+$router->addRoute(new Route('GET', '/subscribe/delete/*', SubscribeController::class . '@delete'));
 
 $router->addRoute(new Route('GET', '/static/*', StaticPageController::class . '@show'));
 

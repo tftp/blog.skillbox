@@ -80,6 +80,10 @@ class NoteController extends PrivateController
                 'image' => $image
             ]);
 
+            $bodyMail = getBodyMail($title, $body, $id);
+
+            (new \App\Service\SubscribeService())->send($bodyMail);
+
             header("Location: /notes/note/$id");
 
         } else {

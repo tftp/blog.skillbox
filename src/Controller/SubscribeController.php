@@ -31,7 +31,10 @@ class SubscribeController extends PrivateController
                 echo json_encode($result);
                 return;
             } else {
-                Subscriber::insert(['email' => $_POST['email']]);
+                Subscriber::insert([
+                    'email' => $_POST['email'],
+                    'secret' => hash('md5', $_POST['email'])
+                 ]);
                 $result = "Вы успешно подписаны. ";
                 if (isSession()) {
                     $_SESSION['subscribe'] = 1;
@@ -48,7 +51,10 @@ class SubscribeController extends PrivateController
                 Subscriber::where('email', $user->email)->delete();
                 $result = 0;
             } else {
-                Subscriber::insert(['email' => $user->email]);
+                Subscriber::insert([
+                    'email' => $user->email,
+                    'secret' => hash('md5', $user->email)
+                ]);
                 $result = 1;
             }
 
@@ -56,5 +62,17 @@ class SubscribeController extends PrivateController
             echo json_encode($result);
             return;
         }
+    }
+
+    public function delete($secret)
+    {
+        $result = Subscriber::where('secret', $secret)->delete();
+
+        if ($result) {
+            echo "Вы успешно отписаны";
+        } else {
+            throw new \App\Exception\NotFoundException();
+        }
+
     }
 }
