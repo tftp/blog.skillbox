@@ -35,3 +35,13 @@ function getCommentsForAdministrator($id){
 
     return $comments;
 }
+
+function getCommentsForModerator(){
+    $comments = \App\Model\Comment::join('users', 'comments.users_id', '=', 'users.id')
+                    ->orderBy('create_time', 'desc')
+                    ->select('comments.*', 'users.name')
+                    ->where('comments.trust', false)
+                    ->get();
+
+    return $comments;
+}

@@ -18,6 +18,11 @@
                                 <p class="card-text"> <?= mb_strimwidth($note->body, 0, 100, '...') ?> </p>
                                 <small class="text-muted">
                                     Создан: <?=  date('d-m-Y H:m:s', strtotime($note->create_time)); ?>
+                                    <?php if (isModerator()) { ?>
+                                        <div class="text-left">
+                                            <a class="card-link" href="/notes/update/<?= $note->id ?>">Редактировать статью</a>
+                                        </div>
+                                    <?php } ?>
                                 </small>
                             </div>
                         </div>

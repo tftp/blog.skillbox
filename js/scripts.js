@@ -11,6 +11,25 @@
   const formSubscribe = document.querySelector('.form-subscribe');
   const imgNoteNew = document.querySelector('.img-note-new');
   const selectUserRole = document.querySelector('.user-role');
+  const commentStatus = document.querySelector('.comment-status-update');
+
+  if(commentStatus) {
+    commentStatus.addEventListener('click', evt => {
+      if(evt.target.dataset.id) {
+        let id = evt.target.dataset.id;
+        let url = '/comments/update';
+        let param = new URLSearchParams({"id": id});
+
+        sendRequest(url, param).then((result) => {
+          if(result && evt.target.classList.contains('text-danger')) {
+            evt.target.classList.remove('text-danger');
+            evt.target.classList.add('text-success');
+            evt.target.innerText = 'Разрешено';
+          }
+        });
+      }
+    });
+  }
 
   if(selectUserRole) {
     selectUserRole.addEventListener('change', evt => {

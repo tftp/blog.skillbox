@@ -42,6 +42,9 @@ $router->addRoute(new Route('POST', '/admin/users/update', AdminUserController::
 $router->addRoute(new Route('GET', '/notes/update/*', AdminNoteController::class . '@show'));
 $router->addRoute(new Route('POST', '/notes/update/*', AdminNoteController::class . '@update'));
 
+$router->addRoute(new Route('GET', '/comments', CommentController::class . '@index'));
+$router->addRoute(new Route('POST', '/comments/update', CommentController::class . '@update'));
+
 $application = new Application($router);
 
 $application->run();
