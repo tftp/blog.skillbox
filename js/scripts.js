@@ -10,6 +10,24 @@
   const btnSubscribe = document.querySelector('.btn-subscribe');
   const formSubscribe = document.querySelector('.form-subscribe');
   const imgNoteNew = document.querySelector('.img-note-new');
+  const selectUserRole = document.querySelector('.user-role');
+
+  if(selectUserRole) {
+    selectUserRole.addEventListener('change', evt => {
+      let id = evt.target.dataset.id;
+      let role = evt.target.value;
+      let url = '/admin/users/update';
+      let param = new URLSearchParams({"id": id, "role": role});
+
+      sendRequest(url, param).then((result) => {
+        if(!result) {
+          window.location.replace('/');
+        } else {
+          alert('Успешно изменено');
+        }
+      });
+    });
+  }
 
   if(imgNoteNew) {
     const imgInput = document.querySelector('#imgInput');
