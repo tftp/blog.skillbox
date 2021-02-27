@@ -63,13 +63,12 @@ class UserController extends PrivateController
 
         $validateFileResult = [];
         $user = User::find($id);
-        
+
         $fileUploadResult = validateFile($_FILES['user-avatar']);
 
         if (isset($fileUploadResult['errors'])) {
             $error = implode(' ', $fileUploadResult['errors']);
             return new View('users.show', ['title' => "Ошибка изменения", 'error' => $error]);
-            // throw new \App\Exception\UpdateUserException($error);
         }
 
         if (isset($fileUploadResult['img_src'])) {

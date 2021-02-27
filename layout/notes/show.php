@@ -4,6 +4,11 @@
     <div class="row justify-content-center">
         <div class="col-sm-6">
             <div class="card">
+                <?php if (isModerator()) { ?>
+                    <div class="card-header text-right">
+                        <a class="card-link" href="/notes/update/<?= $note->id ?>">Редактировать статью</a>
+                    </div>
+                <?php } ?>
                 <img class="card-img-top" src="/images/<?= $note->image ?>">
                 <div class="card-body">
                     <h5 class="card-title"><?= $note->title ?></h5>

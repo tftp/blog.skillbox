@@ -10,6 +10,7 @@ use App\Router;
 use App\Application;
 use App\Controller\UserController;
 use App\Controller\AdminUserController;
+use App\Controller\AdminNoteController;
 use App\Controller\CommentController;
 use App\Controller\NoteController;
 use App\Controller\SubscribeController;
@@ -38,6 +39,8 @@ $router->addRoute(new Route('GET', '/static/*', StaticPageController::class . '@
 
 $router->addRoute(new Route('GET', '/admin/users', AdminUserController::class . '@index'));
 $router->addRoute(new Route('POST', '/admin/users/update', AdminUserController::class . '@update'));
+$router->addRoute(new Route('GET', '/notes/update/*', AdminNoteController::class . '@show'));
+$router->addRoute(new Route('POST', '/notes/update/*', AdminNoteController::class . '@update'));
 
 $application = new Application($router);
 
