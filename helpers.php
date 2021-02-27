@@ -149,10 +149,14 @@ function authorizeUser(\App\Model\User $user) {
 }
 
 function getBodyMail($title, $body, $id) {
-    $bodyMail = "На сайте добавлена новая запись: $title" . PHP_EOL;
-    $bodyMail .= "Новая статья: $title" . PHP_EOL;
-    $bodyMail .= mb_strimwidth($body, 0, 100, '...') . PHP_EOL;
-    $bodyMail .= "Читать " . $_SERVER['HTTP_HOST'] . "/notes/note/$id" . PHP_EOL;
+    $path = $_SERVER['HTTP_HOST'] . "/notes/note/$id" . PHP_EOL;
+    $body= mb_strimwidth($body, 0, 100, '...');
+
+    $search = ['title', 'body', 'path'];
+    $replace = [$title, $body, $path];
+
+    $bodyMail = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/layout/mail');
+    $bodyMail = str_replace($search, $replace, $bodyMail);
 
     return $bodyMail;
 }
