@@ -9,6 +9,7 @@
 <div class="container py-3 px-0">
     <div class="row justify-content-center">
         <div class="col-sm-8">
+            <h2>Пользователи</h2>
             <div class="table-responsive-lg">
                 <table class="table user-role">
                     <thead>

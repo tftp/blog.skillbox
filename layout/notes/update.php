@@ -1,7 +1,8 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/header.php'; ?>
-<div class="container m-3">
+
+<div class="container my-3">
     <div class="row justify-content-center">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
             <?php if (isset($error)) : ?>
                 <div class="alert alert-danger" role="alert" >
                     <?= $error ?>
@@ -15,7 +16,7 @@
                 <div class="form-group">
                     <label for="imageNote">Добавить картинку</label>
                     <input type="file" name="image-note" id="imgInput" accept="image/gif, image/jpeg, image/png" hidden>
-                    <img src="/images/<?= $note->image ?>" id="imageNote" class="img-fluid img-note-new" width="500" alt="">
+                    <img src="/images/<?= $note->image ?>" id="imageNote" class="img-fluid img-note-new" width="620" alt="">
                 </div>
                 <div class="form-group">
                     <label for="bodyNote">Текст статьи</label>
@@ -26,4 +27,5 @@
         </div>
     </div>
 </div>
+
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/footer.php'; ?>

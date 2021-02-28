@@ -1,7 +1,7 @@
 <a name="comment"></a>
-<div class="container m-3">
+<div class="container my-3">
     <div class="row justify-content-center">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
             <div class="card">
                 <?php if (isset($error)) : ?>
                     <div class="alert alert-danger" role="alert" >
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Добавить свой комментарий</h5>

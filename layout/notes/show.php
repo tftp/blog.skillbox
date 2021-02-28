@@ -1,8 +1,9 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/header.php'; ?>
+
 <?php $paragraphs = explode("\n", $note->body) ?>
-<div class="container m-3">
+<div class="container my-3">
     <div class="row justify-content-center">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
             <div class="card">
                 <?php if (isModerator()) { ?>
                     <div class="card-header text-right">
@@ -23,5 +24,7 @@
         </div>
     </div>
 </div>
+
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/comments/show.php'; ?>
+
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/footer.php'; ?>
