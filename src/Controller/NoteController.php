@@ -11,7 +11,7 @@ class NoteController extends PrivateController
     public function index()
     {
         $config = Config::getInstance();
-        $notesOnPage = $config->get('general.notesOnPage');
+        $notesOnPage = $config->get('notesOnPage');
         $count = Note::all()->count();
         $lastPage = $count % $notesOnPage ? 1 : 0;
         $countPages = intdiv($count, $notesOnPage) + $lastPage;

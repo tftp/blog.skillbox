@@ -15,6 +15,8 @@ final class Config
             static::$instance = new static();
             static::$instance->set('db', require $_SERVER['DOCUMENT_ROOT'] . '/configs/db.php');
             static::$instance->set('general', require $_SERVER['DOCUMENT_ROOT'] . '/configs/general.php');
+            static::$instance->set('notesOnPage', (int)file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/notesOnPage'));
+            static::$instance->set('terms', file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/terms'));
         }
 
         return static::$instance;

@@ -12,7 +12,7 @@ class StaticPageController extends PrivateController
         $config = Config::getInstance();
 
         if ($param == 'terms') {
-            $terms = $config->get('general.terms');
+            $terms = $config->get('terms');
             return new View('static.terms', ['terms' => $terms]);
         } else {
             throw new \App\Exception\NotFoundException();

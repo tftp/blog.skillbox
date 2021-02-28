@@ -9,12 +9,7 @@ define('ROLE_USER', 0);
 define('ROLE_ADMINISTRATOR', 1);
 define('ROLE_CONTENT_MANAGER', 2);
 
-// Количество статей на главной странице
-define('NOTES_ON_PAGE', 3);
-
 return [
-    'terms' => file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/terms'),
-    'notesOnPage' => NOTES_ON_PAGE,
     'image' => [
         'allowFileTypes' => ALLOW_FILE_TYPES,
         'allowedFileSize' => ALLOWED_FILE_SIZE
