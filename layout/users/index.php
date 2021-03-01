@@ -37,9 +37,13 @@
                         <?php } ?>
                     </tbody>
                 </table>
+                
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/admin_pagination.php'; ?>
+
             </div>
         </div>
     </div>
 </div>
+
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/footer.php'; ?>

@@ -12,6 +12,14 @@
   const imgNoteNew = document.querySelector('.img-note-new');
   const selectUserRole = document.querySelector('.user-role');
   const commentStatus = document.querySelector('.comment-status-update');
+  const adminPagination = document.querySelector('.admin-pagination-select');
+
+  if(adminPagination) {
+    const buttonPagination = document.querySelector('.admin-pagination-button');
+    adminPagination.addEventListener('change', evt => {
+      buttonPagination.click();
+    });
+  }
 
   if(commentStatus) {
     commentStatus.addEventListener('click', evt => {
