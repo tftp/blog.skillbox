@@ -1,11 +1,11 @@
 <?php
-$countPages = 3;
     if (isset($_GET['page']) && $_GET['page'] <= $countPages && $_GET['page'] > 0) {
         $page = $_GET['page'];
     } else {
         $page = 1;
     }
-$objectsOnPage = $_GET['objectsOnPage'] ?? '20';
+    
+    $objectsOnPage = (int)($_GET['objectsOnPage'] ?? '20');
  ?>
 
 <form class="admin-pagination-form"  method="get">

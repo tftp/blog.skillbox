@@ -2,7 +2,7 @@
 
 <div class="container py-3 px-0">
     <div class="row justify-content-center">
-        <div class="col-sm-8">
+        <div class="col-sm-10">
             <h2>Комментарии</h2>
             <div class="table-responsive-lg">
                 <table class="table user-role comment-status-update">
@@ -27,6 +27,11 @@
                         <?php } ?>
                     </tbody>
                 </table>
+
+                <?php if (count($comments) != 0) : ?>
+                    <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/admin_pagination.php'; ?>
+                <?php endif ?>
+
             </div>
         </div>
     </div>

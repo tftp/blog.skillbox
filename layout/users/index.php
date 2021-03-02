@@ -37,8 +37,10 @@
                         <?php } ?>
                     </tbody>
                 </table>
-                
-                <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/admin_pagination.php'; ?>
+
+                <?php if (count($users) != 0) : ?>
+                    <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/admin_pagination.php'; ?>
+                <?php endif ?>
 
             </div>
         </div>

@@ -8,30 +8,6 @@ use \App\View;
 
 class CommentController extends PrivateController
 {
-    public function index()
-    {
-        if (!isModerator()) {
-            throw new \App\Exception\ForbiddenException();
-        }
-
-        $comments = getCommentsForModerator();
-
-        return new View('comments.index', ['title' => 'Комментарии', 'comments' => $comments]);
-    }
-
-    public function update()
-    {
-        if (!isModerator()) {
-            throw new \App\Exception\ForbiddenException();
-        }
-
-        $comment = Comment::find($_POST['id']);
-        $comment->trust = true;
-        $result = $comment->save();
-
-        echo json_encode($result);
-    }
-
     public function create($id)
     {
         $note = Note::where('id', $id)->first();

@@ -12,6 +12,7 @@ use App\Controller\UserController;
 use App\Controller\AdminUserController;
 use App\Controller\AdminNoteController;
 use App\Controller\AdminOptionController;
+use App\Controller\AdminCommentController;
 use App\Controller\CommentController;
 use App\Controller\NoteController;
 use App\Controller\SubscribeController;
@@ -45,8 +46,8 @@ $router->addRoute(new Route('POST', '/notes/update/*', AdminNoteController::clas
 $router->addRoute(new Route('GET', '/admin/options', AdminOptionController::class . '@index'));
 $router->addRoute(new Route('POST', '/admin/options', AdminOptionController::class . '@update'));
 
-$router->addRoute(new Route('GET', '/comments', CommentController::class . '@index'));
-$router->addRoute(new Route('POST', '/comments/update', CommentController::class . '@update'));
+$router->addRoute(new Route('GET', '/comments', AdminCommentController::class . '@index'));
+$router->addRoute(new Route('POST', '/comments/update', AdminCommentController::class . '@update'));
 
 $application = new Application($router);
 

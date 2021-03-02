@@ -45,3 +45,15 @@ function getCommentsForModerator(){
 
     return $comments;
 }
+
+function getCommentsForPagination($notesOnPage, $page){
+    $comments = \App\Model\Comment::join('users', 'comments.users_id', '=', 'users.id')
+                    ->orderBy('create_time', 'desc')
+                    ->select('comments.*', 'users.name')
+                    ->where('comments.trust', false)
+                    ->skip($notesOnPage * ($page - 1))
+                    ->take($notesOnPage)
+                    ->get();
+
+    return $comments;
+}
