@@ -5,13 +5,13 @@ namespace App\Controller;
 use \App\View;
 use \App\Model\User;
 use \App\Model\Subscriber;
+use \App\Exception\NotFoundException;
+use \App\Exception\RegistrateException;
+use \App\Exception\ForbiddenException;
+use \App\Exception\AuthorizeException;
 
 class UserController extends PrivateController
 {
-    public function index()
-    {
-    }
-
     public function create()
     {
         $error = validateRegistrationData();
@@ -32,7 +32,7 @@ class UserController extends PrivateController
                 'avatar' => $avatar
             ]);
         } catch (\Exception $e) {
-            throw new \App\Exception\RegistrateException();
+            throw new RegistrateException();
         }
 
         $user = User::find($id);
@@ -48,17 +48,17 @@ class UserController extends PrivateController
             return new View('users.show', ['title' => "Профиль {$_SESSION['user']->name}"]);
         }
 
-        throw new \App\Exception\NotFoundException();
+        throw new NotFoundException();
     }
 
     public function update($id)
     {
         if (!isSession()) {
-            throw new \App\Exception\NotFoundException();
+            throw new NotFoundException();
         }
 
         if ($_SESSION['user']->id != $id) {
-            throw new \App\Exception\ForbiddenException();
+            throw new ForbiddenException();
         }
 
         $validateFileResult = [];
@@ -110,8 +110,7 @@ class UserController extends PrivateController
 
             header("Location: /");
         } else {
-            throw new \App\Exception\AuthorizeException();
+            throw new AuthorizeException();
         }
     }
-
 }

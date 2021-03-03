@@ -3,46 +3,49 @@
 namespace App\Controller;
 
 use \App\Model\Subscriber;
+use \App\Exception\NotFoundException;
+use \App\JsonResponse;
 
 class SubscribeController extends PrivateController
 {
     public function update()
     {
-        $result = 0;
-
         if (isset($_POST['email'])) {
 
             if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 $result = "Email указан неверно. ";
-                echo json_encode($result);
-                return;
+
+                return new JsonResponse($result);
             }
 
             if (isSession() && $_SESSION['user']->email != $_POST['email']) {
                 $result = "Email указан неверно. ";
-                echo json_encode($result);
-                return;
+
+                return new JsonResponse($result);
             }
 
             $subscribe = Subscriber::where('email', $_POST['email'])->first();
 
             if ($subscribe) {
                 $result = "Вы уже подписаны. ";
-                echo json_encode($result);
-                return;
+
+                return new JsonResponse($result);
             } else {
                 Subscriber::insert([
                     'email' => $_POST['email'],
                     'secret' => hash('md5', $_POST['email'])
                  ]);
+
                 $result = "Вы успешно подписаны. ";
+
                 if (isSession()) {
                     $_SESSION['subscribe'] = 1;
                 }
-                echo json_encode($result);
-                return;
+
+                return new JsonResponse($result);
             }
         }
+
         if (isSession()) {
             $user = $_SESSION['user'];
             $subscribe = Subscriber::where('email', $user->email)->first();
@@ -59,8 +62,8 @@ class SubscribeController extends PrivateController
             }
 
             $_SESSION['subscribe'] = $result;
-            echo json_encode($result);
-            return;
+
+            return new JsonResponse($result);
         }
     }
 
@@ -71,8 +74,7 @@ class SubscribeController extends PrivateController
         if ($result) {
             echo "Вы успешно отписаны";
         } else {
-            throw new \App\Exception\NotFoundException();
+            throw new NotFoundException();
         }
-
     }
 }

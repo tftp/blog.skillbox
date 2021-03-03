@@ -17,7 +17,7 @@
                     <tbody>
                         <?php foreach ($comments as $comment) { ?>
                             <tr>
-                                <td><?= date('d-m-Y H:m:s', strtotime($comment->create_time)); ?></td>
+                                <td><?= date('d-m-Y H:i:s', strtotime($comment->create_time)); ?></td>
                                 <td><?= $comment->name ?></td>
                                 <td><?= $comment->body ?></td>
                                 <td>

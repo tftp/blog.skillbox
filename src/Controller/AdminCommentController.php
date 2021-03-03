@@ -5,13 +5,15 @@ namespace App\Controller;
 use \App\Model\Comment;
 use \App\Model\Note;
 use \App\View;
+use \App\Exception\ForbiddenException;
+use \App\JsonResponse;
 
 class AdminCommentController extends PrivateController
 {
     public function index()
     {
         if (!isModerator()) {
-            throw new \App\Exception\ForbiddenException();
+            throw new ForbiddenException();
         }
 
         if (isset($_GET['objectsOnPage']) && (int)($_GET['objectsOnPage']) == 0) {
@@ -32,13 +34,13 @@ class AdminCommentController extends PrivateController
     public function update()
     {
         if (!isModerator()) {
-            throw new \App\Exception\ForbiddenException();
+            throw new ForbiddenException();
         }
 
         $comment = Comment::find($_POST['id']);
         $comment->trust = true;
         $result = $comment->save();
 
-        echo json_encode($result);
+        return new JsonResponse($result);
     }
 }

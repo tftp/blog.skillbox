@@ -46,10 +46,6 @@ class CommentController extends PrivateController
             $comments = getCommentsForAuthorizedUser($id);
         }
 
-        if ($error) {
-            return new View('notes.show', ['note' => $note, 'comments' => $comments, 'title' => $note->title, 'error' => $error]);
-        } else {
-            return new View('notes.show', ['note' => $note, 'comments' => $comments, 'title' => $note->title]);
-        }
+        return new View('notes.show', ['note' => $note, 'comments' => $comments, 'title' => $note->title, 'error' => $error]);
     }
 }

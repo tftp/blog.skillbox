@@ -1,4 +1,3 @@
-
   const avatarInput = document.querySelector('#user-avatar');
   const avatarClick = document.querySelector('#click-user-avatar');
   const textClick = document.querySelector('#click-user-text');

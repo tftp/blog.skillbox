@@ -18,7 +18,7 @@
                     <?php } ?>
                 </div>
                 <div class="card-footer text-muted text-center">
-                    Дата создания: <?=  date('d-m-Y H:m:s', strtotime($note->create_time)); ?>
+                    Дата создания: <?=  date('d-m-Y H:i:s', strtotime($note->create_time)); ?>
                 </div>
             </div>
         </div>

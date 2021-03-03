@@ -5,6 +5,9 @@ namespace App\Controller;
 use \App\Model\Note;
 use \App\View;
 use \App\Config;
+use \App\Exception\NotFoundException;
+use \App\Exception\ForbiddenException;
+use \App\Service\SubscribeService;
 
 class NoteController extends PrivateController
 {
@@ -26,7 +29,7 @@ class NoteController extends PrivateController
     {
         $note = Note::where('id', $id)->first();
         if (!$note) {
-            throw new \App\Exception\NotFoundException();
+            throw new NotFoundException();
         }
 
         if (isModerator()) {
@@ -46,48 +49,47 @@ class NoteController extends PrivateController
 
     public function new()
     {
-        if (isModerator()) {
-            return new View('notes.new', ['title' => 'Новая статья']);
-        } else {
-            throw new \App\Exception\ForbiddenException();
+        if (!isModerator()) {
+            throw new ForbiddenException();
         }
+
+        return new View('notes.new', ['title' => 'Новая статья']);
     }
 
     public function create()
     {
-        if (isModerator()) {
-            $error = validateNoteData();
-
-            if ($error) {
-                return new View('notes.new', ['error' => $error, 'title' => 'Ошибка сохранения']);
-            }
-
-            $fileUploadResult = validateFile($_FILES['image-note']);
-
-            if (isset($fileUploadResult['errors'])) {
-                $error = implode(' ', $fileUploadResult['errors']);
-
-                return new View('notes.new', ['error' => $error, 'title' => 'Ошибка сохранения']);
-            }
-
-            $title = trim(strip_tags($_POST['title']));
-            $body = trim(strip_tags($_POST['body']));
-            $image = $fileUploadResult['img_src'] ?? 'no-image-note.png';
-
-            $id = Note::insertGetId([
-                'title' => $title,
-                'body' => $body,
-                'image' => $image
-            ]);
-
-            $bodyMail = getBodyMail($title, $body, $id);
-
-            (new \App\Service\SubscribeService())->send($bodyMail);
-
-            header("Location: /notes/note/$id");
-
-        } else {
-            throw new \App\Exception\ForbiddenException();
+        if (!isModerator()) {
+            throw new ForbiddenException();
         }
+
+        $error = validateNoteData();
+
+        if ($error) {
+            return new View('notes.new', ['error' => $error, 'title' => 'Ошибка сохранения']);
+        }
+
+        $fileUploadResult = validateFile($_FILES['image-note']);
+
+        if (isset($fileUploadResult['errors'])) {
+            $error = implode(' ', $fileUploadResult['errors']);
+
+            return new View('notes.new', ['error' => $error, 'title' => 'Ошибка сохранения']);
+        }
+
+        $title = trim(strip_tags($_POST['title']));
+        $body = trim(strip_tags($_POST['body']));
+        $image = $fileUploadResult['img_src'] ?? 'no-image-note.png';
+
+        $id = Note::insertGetId([
+            'title' => $title,
+            'body' => $body,
+            'image' => $image
+        ]);
+
+        $bodyMail = getBodyMail($title, $body, $id);
+
+        (new SubscribeService())->send($bodyMail);
+
+        header("Location: /notes/note/$id");
     }
 }

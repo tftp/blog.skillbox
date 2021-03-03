@@ -4,13 +4,15 @@ namespace App\Controller;
 
 use \App\View;
 use \App\Model\User;
+use \App\Exception\ForbiddenException;
+use \App\JsonResponse;
 
 class AdminUserController extends PrivateController
 {
     public function index()
     {
         if (!isAdmin()) {
-            throw new \App\Exception\NotFoundException();
+            throw new ForbiddenException();
         }
 
         if (isset($_GET['objectsOnPage']) && (int)($_GET['objectsOnPage']) == 0) {
@@ -32,7 +34,7 @@ class AdminUserController extends PrivateController
     public function update()
     {
         if (!isAdmin()) {
-            throw new \App\Exception\NotFoundException();
+            throw new ForbiddenException();
         }
 
         $result = 0;
@@ -48,6 +50,6 @@ class AdminUserController extends PrivateController
             $result = 0;
         }
 
-        echo json_encode($result);
+        return new JsonResponse($result);
     }
 }

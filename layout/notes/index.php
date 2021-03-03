@@ -18,7 +18,7 @@
                             <h5 class="card-title"><a href="/notes/note/<?= $note->id ?>" class="card-link"><?= $note->title; ?></a></h5>
                             <p class="card-text"> <?= mb_strimwidth($note->body, 0, 100, '...') ?> </p>
                             <small class="text-muted">
-                                Создан: <?=  date('d-m-Y H:m:s', strtotime($note->create_time)); ?>
+                                Создан: <?=  date('d-m-Y H:i:s', strtotime($note->create_time)); ?>
                                 <?php if (isModerator()) { ?>
                                     <div class="text-left">
                                         <a class="card-link" href="/notes/update/<?= $note->id ?>">Редактировать статью</a>

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use \App\View;
 use \App\Config;
+use \App\Exception\NotFoundException;
 
 class StaticPageController extends PrivateController
 {
@@ -15,7 +16,7 @@ class StaticPageController extends PrivateController
             $terms = $config->get('terms');
             return new View('static.terms', ['terms' => $terms]);
         } else {
-            throw new \App\Exception\NotFoundException();
+            throw new NotFoundException();
         }
     }
 }

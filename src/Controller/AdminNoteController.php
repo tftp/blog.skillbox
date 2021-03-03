@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use \App\View;
 use \App\Model\Note;
+use \App\Exception\ForbiddenException;
 
 class AdminNoteController extends PrivateController
 {
     public function show($id)
     {
         if (!isModerator()) {
-            throw new \App\Exception\ForbiddenException();
+            throw new ForbiddenException();
         }
 
         $note = Note::find($id);
@@ -21,8 +22,9 @@ class AdminNoteController extends PrivateController
     public function update($id)
     {
         if (!isModerator()) {
-            throw new \App\Exception\ForbiddenException();
+            throw new ForbiddenException();
         }
+        
         $note = Note::find($id);
         $error = validateNoteData();
 

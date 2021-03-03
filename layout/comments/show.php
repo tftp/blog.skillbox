@@ -14,7 +14,7 @@
                             <small class="card-text">
                                 <img src="/images/<?= $comment->avatar ?>" class=".img-fluid rounded-circle" style="max-width: 10%">
                                 <?= $comment->name ?>,
-                                <?=  date('d-m-Y H:m:s', strtotime($comment->create_time)); ?>
+                                <?=  date('d-m-Y H:i:s', strtotime($comment->create_time)); ?>
                                 <?= $comment->trust ? '' : "<span class='text-danger'> комментарий на модерации</span>" ?>
                             </small>
                             <p class='card-text'>

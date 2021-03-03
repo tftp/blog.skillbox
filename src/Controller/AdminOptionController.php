@@ -5,13 +5,14 @@ namespace App\Controller;
 use \App\View;
 use \App\Model\Note;
 use \App\Config;
+use \App\Exception\ForbiddenException;
 
 class AdminOptionController extends PrivateController
 {
     public function index()
     {
         if (!isAdmin()) {
-            throw new \App\Exception\ForbiddenException();
+            throw new ForbiddenException();
         }
 
         $config = Config::getInstance();
@@ -25,7 +26,7 @@ class AdminOptionController extends PrivateController
     public function update()
     {
         if (!isAdmin()) {
-            throw new \App\Exception\ForbiddenException();
+            throw new ForbiddenException();
         }
 
         $terms = $_POST['terms'];

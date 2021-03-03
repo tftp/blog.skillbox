@@ -9,7 +9,6 @@ class Application
 
     public function __construct(Router $router)
     {
-
         $this->initialize();
         $this->router = $router;
     }
@@ -29,7 +28,6 @@ class Application
         } else {
             echo $view;
         }
-
     }
 
     public function renderException($e)
