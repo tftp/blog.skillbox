@@ -44,11 +44,15 @@ class UserController extends PrivateController
 
     public function show($id)
     {
-        if (isSession() && $_SESSION['user']->id == $id) {
-            return new View('users.show', ['title' => "Профиль {$_SESSION['user']->name}"]);
+        if (!isSession()) {
+            throw new NotFoundException();
         }
 
-        throw new NotFoundException();
+        if ($_SESSION['user']->id != $id) {
+            throw new ForbiddenException();
+        }
+
+            return new View('users.show', ['title' => "Профиль {$_SESSION['user']->name}"]);
     }
 
     public function update($id)

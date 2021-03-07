@@ -5,16 +5,11 @@ namespace App\Controller;
 use \App\View;
 use \App\Model\Note;
 use \App\Config;
-use \App\Exception\ForbiddenException;
 
-class AdminOptionController extends PrivateController
+class AdminOptionController extends AdminController
 {
     public function index()
     {
-        if (!isAdmin()) {
-            throw new ForbiddenException();
-        }
-
         $config = Config::getInstance();
         $terms = $config->get('terms');
         $numberNotes = $config->get('notesOnPage');
@@ -25,10 +20,6 @@ class AdminOptionController extends PrivateController
 
     public function update()
     {
-        if (!isAdmin()) {
-            throw new ForbiddenException();
-        }
-
         $terms = $_POST['terms'];
         $numberNotes = $_POST['numberNotes'];
 

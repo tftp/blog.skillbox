@@ -5,17 +5,12 @@ namespace App\Controller;
 use \App\Model\Comment;
 use \App\Model\Note;
 use \App\View;
-use \App\Exception\ForbiddenException;
 use \App\JsonResponse;
 
-class AdminCommentController extends PrivateController
+class ModerateCommentController extends ModerateController
 {
     public function index()
     {
-        if (!isModerator()) {
-            throw new ForbiddenException();
-        }
-
         if (isset($_GET['objectsOnPage']) && (int)($_GET['objectsOnPage']) == 0) {
             $comments = getCommentsForModerator();
             $countPages = 1;
@@ -33,10 +28,6 @@ class AdminCommentController extends PrivateController
 
     public function update()
     {
-        if (!isModerator()) {
-            throw new ForbiddenException();
-        }
-
         $comment = Comment::find($_POST['id']);
         $comment->trust = true;
         $result = $comment->save();

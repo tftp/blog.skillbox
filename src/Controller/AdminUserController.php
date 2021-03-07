@@ -4,17 +4,12 @@ namespace App\Controller;
 
 use \App\View;
 use \App\Model\User;
-use \App\Exception\ForbiddenException;
 use \App\JsonResponse;
 
-class AdminUserController extends PrivateController
+class AdminUserController extends AdminController
 {
     public function index()
     {
-        if (!isAdmin()) {
-            throw new ForbiddenException();
-        }
-
         if (isset($_GET['objectsOnPage']) && (int)($_GET['objectsOnPage']) == 0) {
             $users = User::all();
             $countPages = 1;
@@ -33,10 +28,6 @@ class AdminUserController extends PrivateController
 
     public function update()
     {
-        if (!isAdmin()) {
-            throw new ForbiddenException();
-        }
-
         $result = 0;
         $id = $_POST['id'];
         $role = $_POST['role'];

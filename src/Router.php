@@ -2,13 +2,20 @@
 
 namespace App;
 
+use \App\Route;
+
 class Router
 {
     public $routes = [];
 
-    public function addRoute(Route $route)
+    public function addGet($uri, $method)
     {
-        $this->routes[] = $route;
+        $this->routes[] = new Route('GET', $uri, $method);
+    }
+
+    public function addPost($uri, $method)
+    {
+        $this->routes[] = new Route('POST', $uri, $method);
     }
 
     public function findRoute($method, $url)
