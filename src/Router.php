@@ -2,7 +2,7 @@
 
 namespace App;
 
-use \App\Route;
+use App\Route;
 
 class Router
 {

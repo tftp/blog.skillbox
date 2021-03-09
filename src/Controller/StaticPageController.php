@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use \App\View;
-use \App\Config;
-use \App\Exception\NotFoundException;
+use App\View;
+use App\Config;
+use App\Exception\NotFoundException;
 
 class StaticPageController extends PrivateController
 {

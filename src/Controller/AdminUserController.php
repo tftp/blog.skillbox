@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use \App\View;
-use \App\Model\User;
-use \App\JsonResponse;
+use App\View;
+use App\Model\User;
+use App\JsonResponse;
 
 class AdminUserController extends AdminController
 {

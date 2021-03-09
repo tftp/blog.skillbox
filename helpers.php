@@ -91,7 +91,7 @@ function validateFile($file) {
 }
 
 function errorsLoad($file) {
-    $config = \App\Config::getInstance();
+    $config = App\Config::getInstance();
     $isAllowedType = in_array($file['type'], $config->get('general.image.allowFileTypes'));
     $isAllowedSize = $file['size'] / 1024 / 1024 <= $config->get('general.image.allowedFileSize');
     $isEmptyErrors = empty($file['error']);
@@ -124,25 +124,25 @@ function validateNoteData() {
 }
 
 function isModerator() {
-    $config = \App\Config::getInstance();
+    $config = App\Config::getInstance();
 
     return isSession() && $_SESSION['user']->role !== $config->get('general.role.roleUser');
 }
 
 function isAdmin() {
-    $config = \App\Config::getInstance();
+    $config = App\Config::getInstance();
 
     return isSession() && $_SESSION['user']->role == $config->get('general.role.roleAdministrator');
 }
 
 function isAuthorizedUser() {
-    $config = \App\Config::getInstance();
+    $config = App\Config::getInstance();
 
     return isSession() && $_SESSION['user']->role == $config->get('general.role.roleUser');
 }
 
 function authorizeUser(\App\Model\User $user) {
-    $subscribe = \App\Model\Subscriber::where('email', $user->email)->first();
+    $subscribe = App\Model\Subscriber::where('email', $user->email)->first();
     $_SESSION['subscribe'] = $subscribe ? 1 : 0;
     $_SESSION['user'] = $user;
     $_SESSION['success'] = true;
@@ -159,4 +159,10 @@ function getBodyMail($title, $body, $id) {
     $bodyMail = str_replace($search, $replace, $bodyMail);
 
     return $bodyMail;
+}
+
+function checkUserId($id) {
+    if ($_SESSION['user']->id != $id) {
+        throw new App\Exception\ForbiddenException();
+    }
 }

@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Exception\ForbiddenException;
 
-abstract class ModerateController extends PrivateController
+abstract class ForAuthorizedController extends PrivateController
 {
     public function __construct()
     {
         parent::__construct();
 
-        if (!isModerator()) {
+        if (!isSession()) {
             throw new ForbiddenException();
         }
     }

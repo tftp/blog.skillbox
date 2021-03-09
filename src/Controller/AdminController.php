@@ -2,17 +2,16 @@
 
 namespace App\Controller;
 
-use \App\Exception\ForbiddenException;
+use App\Exception\ForbiddenException;
 
 abstract class AdminController extends PrivateController
 {
     public function __construct()
     {
-        $this->startSession();
+        parent::__construct();
 
         if (!isAdmin()) {
             throw new ForbiddenException();
         }
-
     }
 }

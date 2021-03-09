@@ -21,6 +21,5 @@ class PrivateController
         unset($_SESSION['success']);
         unset($_SESSION['user']);
         header("Location: /");
-
     }
 }

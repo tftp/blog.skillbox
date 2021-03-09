@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use \App\View;
-use \App\Model\Note;
-use \App\Config;
+use App\View;
+use App\Config;
 
 class AdminOptionController extends AdminController
 {
@@ -15,7 +14,6 @@ class AdminOptionController extends AdminController
         $numberNotes = $config->get('notesOnPage');
 
         return new View('options.index', ['title' => 'Настройки', 'terms' => $terms, 'numberNotes' => $numberNotes]);
-
     }
 
     public function update()
@@ -25,7 +23,6 @@ class AdminOptionController extends AdminController
 
         file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/terms', $terms);
         file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/notesOnPage', (int)$numberNotes);
-
 
         $config = Config::getInstance();
         $config->set('notesOnPage', (int)file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/notesOnPage'));

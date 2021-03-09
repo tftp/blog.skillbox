@@ -2,10 +2,9 @@
 
 namespace App\Controller;
 
-use \App\Model\Comment;
-use \App\Model\Note;
-use \App\View;
-use \App\JsonResponse;
+use App\Model\Comment;
+use App\View;
+use App\JsonResponse;
 
 class ModerateCommentController extends ModerateController
 {

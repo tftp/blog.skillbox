@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use \App\Model\Comment;
-use \App\Model\Note;
-use \App\View;
+use App\Model\Comment;
+use App\Model\Note;
+use App\View;
 
 class CommentController extends PrivateController
 {

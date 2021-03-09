@@ -81,7 +81,7 @@
         evt.preventDefault();
 
         let form = new FormData(formSubscribe);
-        let url = '/subscribe/update';
+        let url = evt.target.dataset.id ? '/users/subscribe/update' : '/subscribe/update';
 
         sendRequest(url, form).then((result) => {
           if(evt.target.dataset.id) {
@@ -96,7 +96,7 @@
     btnSubscribe.addEventListener('click', evt => {
       evt.preventDefault();
       let subscribe = evt.target.dataset.subscribe;
-      let url = '/subscribe/update';
+      let url = '/users/subscribe/update';
       let param = new URLSearchParams({"subscribe": subscribe});
 
       sendRequest(url, param).then((result) => {

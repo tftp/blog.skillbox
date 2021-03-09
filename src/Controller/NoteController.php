@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use \App\Model\Note;
-use \App\View;
-use \App\Config;
-use \App\Exception\NotFoundException;
+use App\Model\Note;
+use App\View;
+use App\Config;
+use App\Exception\NotFoundException;
 
 class NoteController extends PrivateController
 {

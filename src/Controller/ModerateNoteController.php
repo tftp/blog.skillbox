@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use \App\View;
-use \App\Model\Note;
-use \App\Service\SubscribeService;
+use App\View;
+use App\Model\Note;
+use App\Service\SubscribeService;
 
 class ModerateNoteController extends ModerateController
 {

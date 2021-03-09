@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use \App\Model\Subscriber;
+use App\Model\Subscriber;
 
 class SubscribeService
 {

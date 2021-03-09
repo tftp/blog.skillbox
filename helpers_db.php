@@ -1,7 +1,7 @@
 <?php
 
 function getCommentsForNotAuthorizedUser($id){
-    $comments = \App\Model\Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
+    $comments = App\Model\Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
                     ->join('users', 'comments.users_id', '=', 'users.id')
                     ->select('comments.*', 'users.name', 'users.avatar')
                     ->where('comments.notes_id', $id)
@@ -12,7 +12,7 @@ function getCommentsForNotAuthorizedUser($id){
 }
 
 function getCommentsForAuthorizedUser($id){
-    $comments = \App\Model\Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
+    $comments = App\Model\Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
                     ->join('users', 'comments.users_id', '=', 'users.id')
                     ->select('comments.*', 'users.name', 'users.avatar')
                     ->where('comments.notes_id', $id)
@@ -27,7 +27,7 @@ function getCommentsForAuthorizedUser($id){
 }
 
 function getCommentsForAdministrator($id){
-    $comments = \App\Model\Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
+    $comments = App\Model\Comment::join('notes', 'comments.notes_id', '=', 'notes.id')
                     ->join('users', 'comments.users_id', '=', 'users.id')
                     ->select('comments.*', 'users.name', 'users.avatar')
                     ->where('comments.notes_id', $id)
@@ -37,7 +37,7 @@ function getCommentsForAdministrator($id){
 }
 
 function getCommentsForModerator(){
-    $comments = \App\Model\Comment::join('users', 'comments.users_id', '=', 'users.id')
+    $comments = App\Model\Comment::join('users', 'comments.users_id', '=', 'users.id')
                     ->orderBy('create_time', 'desc')
                     ->select('comments.*', 'users.name')
                     ->where('comments.trust', false)
@@ -47,7 +47,7 @@ function getCommentsForModerator(){
 }
 
 function getCommentsForPagination($notesOnPage, $page){
-    $comments = \App\Model\Comment::join('users', 'comments.users_id', '=', 'users.id')
+    $comments = App\Model\Comment::join('users', 'comments.users_id', '=', 'users.id')
                     ->orderBy('create_time', 'desc')
                     ->select('comments.*', 'users.name')
                     ->where('comments.trust', false)
