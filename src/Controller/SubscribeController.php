@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use \App\Model\Subscriber;
-use \App\Exception\NotFoundException;
-use \App\JsonResponse;
+use App\Model\Subscriber;
+use App\Exception\NotFoundException;
+use App\JsonResponse;
 
 class SubscribeController extends PrivateController
 {
