@@ -28,7 +28,6 @@ class AdminUserController extends AdminController
 
     public function update()
     {
-        $result = 0;
         $id = $_POST['id'];
         $role = $_POST['role'];
 

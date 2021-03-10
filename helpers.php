@@ -31,6 +31,10 @@ function isSession() {
     return isset($_SESSION['success']) && $_SESSION['success'] == true;
 }
 
+function isSessionFailed() {
+    return is_null($_SESSION['user']) || is_null($_SESSION['user']->id);
+}
+
 function validateRegistrationData() {
     $name = trim(strip_tags($_POST['name']));
     $email = strip_tags($_POST['email']);

@@ -13,5 +13,9 @@ abstract class AdminController extends PrivateController
         if (!isAdmin()) {
             throw new ForbiddenException();
         }
+
+        if (isSessionFailed()) {
+            $this->redirect('/exit');
+        }
     }
 }

@@ -13,5 +13,9 @@ abstract class ForAuthorizedController extends PrivateController
         if (!isSession()) {
             throw new ForbiddenException();
         }
+
+        if (isSessionFailed()) {
+            $this->redirect('/exit');
+        }
     }
 }

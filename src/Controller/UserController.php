@@ -36,7 +36,7 @@ class UserController extends PrivateController
 
         authorizeUser($user);
 
-        header("Location: /");
+        $this->redirect("/");
     }
 
     public function new()
@@ -59,7 +59,7 @@ class UserController extends PrivateController
         if ($user && password_verify($password, $user->password)) {
             authorizeUser($user);
 
-            header("Location: /");
+            $this->redirect("/");
         } else {
             throw new AuthorizeException();
         }

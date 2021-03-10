@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\View;
 use App\Config;
+use App\Exception\FilePutException;
 
 class AdminOptionController extends AdminController
 {
@@ -20,9 +21,25 @@ class AdminOptionController extends AdminController
     {
         $terms = $_POST['terms'];
         $numberNotes = $_POST['numberNotes'];
+        $errors = [];
 
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/terms', $terms);
-        file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/notesOnPage', (int)$numberNotes);
+            $success = file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/terms', $terms);
+
+            if (!$success) {
+                $errors[] = 'Ошибка сохранения правил.';
+            }
+
+            $success = file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/notesOnPage', (int)$numberNotes);
+
+            if (!$success) {
+                $errors[] = 'Ошибка сохранения количества элементов на странице.';
+            }
+
+            if (!empty($errors)) {
+                $data = ['title' => 'Настройки', 'terms' => $terms, 'numberNotes' => $numberNotes, 'errors' => implode(' ', $errors)];
+
+                throw new FilePutException($data);
+            }
 
         $config = Config::getInstance();
         $config->set('notesOnPage', (int)file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/configs/notesOnPage'));

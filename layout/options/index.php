@@ -9,6 +9,11 @@
                     <?= $success ?>
                 </div>
             <?php endif; ?>
+            <?php if (isset($errors)) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $errors ?>
+                </div>
+            <?php endif; ?>
             <form method="post" class="update-terms">
                 <div class="form-group">
                     <label for="numberNotes">Количество статей на главной странице</label>

@@ -22,4 +22,9 @@ class PrivateController
         unset($_SESSION['user']);
         header("Location: /");
     }
+
+    public function redirect($uri)
+    {
+        header("Location: " . $uri);
+    }
 }

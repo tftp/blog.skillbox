@@ -13,5 +13,9 @@ abstract class ModerateController extends PrivateController
         if (!isModerator()) {
             throw new ForbiddenException();
         }
+
+        if (isSessionFailed()) {
+            $this->redirect('/exit');
+        }
     }
 }

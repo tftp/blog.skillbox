@@ -43,7 +43,7 @@ class ModerateNoteController extends ModerateController
 
         (new SubscribeService())->send($bodyMail);
 
-        header("Location: /notes/note/$id");
+        $this->redirect('/notes/note/' . $id);
     }
 
     public function show($id)
@@ -77,8 +77,8 @@ class ModerateNoteController extends ModerateController
             $note->image = $fileUploadResult['img_src'];
         }
 
-        $result = $note->save();
+        $note->save();
 
-        header("Location: /notes/note/$id");
+        $this->redirect('/notes/note/' . $id);
     }
 }
