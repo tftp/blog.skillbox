@@ -6,9 +6,20 @@
         <div class="col-sm-7">
             <div class="card">
                 <?php if (isModerator()) { ?>
-                    <div class="card-header text-right">
-                        <a class="card-link" href="/notes/update/<?= $note->id ?>">Редактировать статью</a>
-                    </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="card-header text-left">
+                                    <a class="card-link" href="/notes/delete/<?= $note->id ?>">Удалить</a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="card-header text-right">
+                                    <a class="card-link" href="/notes/update/<?= $note->id ?>">Редактировать статью</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 <?php } ?>
                 <img class="card-img-top" src="/images/<?= $note->image ?>">
                 <div class="card-body">

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\View;
 use App\Model\Note;
 use App\Service\SubscribeService;
+use App\Exception\NotFoundException;
 
 class ModerateNoteController extends ModerateController
 {
@@ -80,5 +81,17 @@ class ModerateNoteController extends ModerateController
         $note->save();
 
         $this->redirect('/notes/note/' . $id);
+    }
+
+    public function delete($id)
+    {
+        $note = Note::find($id);
+
+        if (!$note) {
+            throw new NotFoundException();
+        }
+
+        $note->delete();
+        $this->redirect('/');
     }
 }

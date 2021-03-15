@@ -45,6 +45,7 @@ $router->addGet('/static/*', StaticPageController::class . '@show');
 
 $router->addGet('/admin/users', AdminUserController::class . '@index');
 $router->addPost('/admin/users/update', AdminUserController::class . '@update');
+$router->addGet('/notes/delete/*', ModerateNoteController::class . '@delete');
 $router->addGet('/notes/update/*', ModerateNoteController::class . '@show');
 $router->addPost('/notes/update/*', ModerateNoteController::class . '@update');
 $router->addGet('/admin/options', AdminOptionController::class . '@index');
