@@ -15,7 +15,8 @@
                                 <img src="/images/<?= $comment->avatar ?>" class=".img-fluid rounded-circle" style="max-width: 10%">
                                 <?= $comment->name ?>,
                                 <?=  date('d-m-Y H:i:s', strtotime($comment->create_time)); ?>
-                                <?= $comment->trust ? '' : "<span class='text-danger'> комментарий на модерации</span>" ?>
+                                <?= $comment->trust == 0 ? "<span class='text-warning'> комментарий на модерации</span>" : '' ?>
+                                <?= $comment->trust < 0 ? "<span class='text-danger'> комментарий отклонен модератором</span>" : '' ?>
                             </small>
                             <p class='card-text'>
                                 <?= $comment->body ?>

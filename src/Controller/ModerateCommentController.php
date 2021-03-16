@@ -27,9 +27,16 @@ class ModerateCommentController extends ModerateController
 
     public function update()
     {
-        $comment = Comment::find($_POST['id']);
-        $comment->trust = true;
-        $result = $comment->save();
+        $id = (int)$_POST['id'];
+        $status = (int)$_POST['status'];
+        $result = false;
+
+        $comment = Comment::find($id);
+
+        if ($comment) {
+            $comment->trust = $status;
+            $result = $comment->save();
+        }
 
         return new JsonResponse($result);
     }

@@ -21,17 +21,29 @@
   }
 
   if(commentStatus) {
-    commentStatus.addEventListener('click', evt => {
+    commentStatus.addEventListener('change', evt => {
       if(evt.target.dataset.id) {
         let id = evt.target.dataset.id;
+        let parent = evt.target.parentNode.parentNode;
         let url = '/comments/update';
-        let param = new URLSearchParams({"id": id});
+        let status = evt.target.value;
+        let param = new URLSearchParams({"id": id, "status": status});
 
         sendRequest(url, param).then((result) => {
-          if(result && evt.target.classList.contains('text-danger')) {
-            evt.target.classList.remove('text-danger');
-            evt.target.classList.add('text-success');
-            evt.target.innerText = 'Разрешено';
+          if(result) {
+            parent.classList.remove("table-success", "table-danger", "table-warning");
+
+            if(status == 0) {
+              parent.classList.add("table-warning");
+            }
+
+            if(status > 0) {
+              parent.classList.add("table-success");
+            }
+
+            if(status < 0) {
+              parent.classList.add("table-danger");
+            }
           }
         });
       }

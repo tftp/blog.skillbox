@@ -5,23 +5,36 @@
         <div class="col-sm-10">
             <h2>Комментарии</h2>
             <div class="table-responsive-lg">
-                <table class="table user-role comment-status-update">
+                <table class="table comment-status-update">
                     <thead>
                         <tr class="">
-                            <th scope="col">date</th>
-                            <th scope="col">user</th>
-                            <th scope="col">body</th>
-                            <th scope="col">status</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col">Пользователь</th>
+                            <th scope="col">Комментарий</th>
+                            <th scope="col">Статус</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($comments as $comment) { ?>
-                            <tr>
+                            <?php if ($comment->trust == 0) { ?>
+                                <tr class="table-warning">
+                            <?php } ?>
+                            <?php if ($comment->trust > 0) { ?>
+                                <tr class="table-success">
+                            <?php } ?>
+                            <?php if ($comment->trust < 0) { ?>
+                                <tr class="table-danger">
+                            <?php } ?>
                                 <td><?= date('d-m-Y H:i:s', strtotime($comment->create_time)); ?></td>
                                 <td><?= $comment->name ?></td>
-                                <td><?= $comment->body ?></td>
+                                <td class="w-50 p3">
+                                        <?= $comment->body ?></td>
                                 <td>
-                                    <a class="card-link text-danger" data-id="<?= $comment->id ?>" href="#">На модерации</a>
+                                        <select class="comment-select-status form-control" data-id="<?= $comment->id ?>">
+                                            <option value="0" <?= $comment->trust == 0 ? 'selected' : '' ?>>На модерации</option>
+                                            <option value="1" <?= $comment->trust > 0 ? 'selected' : '' ?>>Разрешено</option>
+                                            <option value="-1" <?= $comment->trust < 0 ? 'selected' : '' ?>>Отклонено</option>
+                                        </select>
                                 </td>
                             </tr>
                         <?php } ?>
