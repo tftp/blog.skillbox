@@ -11,6 +11,9 @@
                 <a class="nav-link active <?= $title == 'Пользователи' ? 'disabled' : '' ?>" href="/admin/users">Пользователи</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link active <?= $title == 'Подписки' ? 'disabled' : '' ?>" href="/admin/subscribers">Подписки</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link active <?= $title == 'Настройки' ? 'disabled' : '' ?>" href="/admin/options">Настройки</a>
             </li>
         <?php } ?>

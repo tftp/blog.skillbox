@@ -10,6 +10,7 @@ use App\Application;
 use App\Controller\UserController;
 use App\Controller\ForAuthorizedUserController;
 use App\Controller\AdminUserController;
+use App\Controller\AdminSubscriberController;
 use App\Controller\ModerateNoteController;
 use App\Controller\AdminOptionController;
 use App\Controller\ModerateCommentController;
@@ -50,6 +51,8 @@ $router->addGet('/notes/update/*', ModerateNoteController::class . '@show');
 $router->addPost('/notes/update/*', ModerateNoteController::class . '@update');
 $router->addGet('/admin/options', AdminOptionController::class . '@index');
 $router->addPost('/admin/options', AdminOptionController::class . '@update');
+$router->addGet('/admin/subscribers', AdminSubscriberController::class . '@index');
+$router->addPost('/admin/subscribers/delete', AdminSubscriberController::class . '@delete');
 
 $router->addGet('/comments', ModerateCommentController::class . '@index');
 $router->addPost('/comments/update', ModerateCommentController::class . '@update');

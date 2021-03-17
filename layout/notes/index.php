@@ -39,7 +39,7 @@
     </div>
 </div>
 
-<?php if (!isSession() || (isSession() && !$_SESSION['subscribe'])) : ?>
+<?php if (!isSession() || (isSession() && !$_SESSION['subscribe'] && !isAdmin())) : ?>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/layout/subscription.php'; ?>
 <?php endif ?>
 

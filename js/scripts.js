@@ -12,11 +12,38 @@
   const selectUserRole = document.querySelector('.user-role');
   const commentStatus = document.querySelector('.comment-status-update');
   const adminPagination = document.querySelector('.admin-pagination-select');
+  const tableSubscribers = document.querySelector('.table-subscribers');
 
   if(adminPagination) {
     const buttonPagination = document.querySelector('.admin-pagination-button');
     adminPagination.addEventListener('change', evt => {
       buttonPagination.click();
+    });
+  }
+
+  if(tableSubscribers) {
+    const alert = document.querySelector('.alert');
+
+    tableSubscribers.addEventListener('click', evt => {
+      if(evt.target.dataset.secret) {
+        let secret = evt.target.dataset.secret;
+        let parent = evt.target.parentNode.parentNode;
+        let url = '/admin/subscribers/delete';
+        let param = new URLSearchParams({"secret": secret});
+
+        alert.classList.remove("alert", "alert-success", "alert-danger");
+
+        sendRequest(url, param).then((result) => {
+            if(result) {
+              parent.remove();
+              alert.classList.add("alert", "alert-success");
+              alert.innerText = "Успешно удалено";
+            } else {
+              alert.classList.add("alert", "alert-danger");
+              alert.innerText = "Ошибка удаления";
+            }
+        });
+      }
     });
   }
 
@@ -99,7 +126,11 @@
           if(evt.target.dataset.id) {
             formSubscribe.hidden = true;
           }
-          textMute.innerText = result;
+          textMute.innerText = result["message"];
+
+          if(evt.target.classList.contains("admin") && result["success"]) {
+            location.reload();
+          }
         });
       });
   }

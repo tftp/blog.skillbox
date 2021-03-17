@@ -13,7 +13,7 @@ class SubscribeController extends PrivateController
         if (isset($_POST['email'])) {
 
             if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-                $result = "Email указан неверно. ";
+                $result["message"] = "Email указан неверно. ";
 
                 return new JsonResponse($result);
             }
@@ -21,7 +21,7 @@ class SubscribeController extends PrivateController
             $subscribe = Subscriber::where('email', $_POST['email'])->first();
 
             if ($subscribe) {
-                $result = "Вы уже подписаны. ";
+                $result["message"] = "Вы уже подписаны. ";
 
                 return new JsonResponse($result);
             } else {
@@ -30,7 +30,8 @@ class SubscribeController extends PrivateController
                     'secret' => hash('md5', $_POST['email'])
                  ]);
 
-                $result = "Вы успешно подписаны. ";
+                $result["message"] = "Вы успешно подписаны. ";
+                $result["success"] = true;
 
                 return new JsonResponse($result);
             }
