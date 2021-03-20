@@ -16,6 +16,20 @@
             <li class="nav-item">
                 <a class="nav-link active <?= $title == 'Настройки' ? 'disabled' : '' ?>" href="/admin/options">Настройки</a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Редактирование страниц
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php if ($aliases) { ?>
+                            <?php foreach($aliases as $id => $alias) { ?>
+                                <a class="dropdown-item" href="/admin/static/update/<?= $id ?>"><?= $alias; ?></a>
+                            <?php } ?>
+                        <div class="dropdown-divider"></div>
+                    <?php } ?>
+                    <a class="dropdown-item" href="/admin/static/new">Создание новой страницы</a>
+                </div>
+            </li>
         <?php } ?>
     </ul>
 </nav>

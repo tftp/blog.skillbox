@@ -170,3 +170,11 @@ function checkUserId($id) {
         throw new App\Exception\ForbiddenException();
     }
 }
+
+function initializeStaticPages() {
+    $config = App\Config::getInstance();
+
+    $config->set('aliases', getStaticPageAliases());
+
+    $_SESSION['aliases'] = $config->get('aliases');
+}

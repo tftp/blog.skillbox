@@ -62,5 +62,7 @@ class Application
 
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
+
+        $config->set('aliases', getStaticPageAliases());
     }
 }

@@ -10,6 +10,7 @@ use App\Application;
 use App\Controller\UserController;
 use App\Controller\ForAuthorizedUserController;
 use App\Controller\AdminUserController;
+use App\Controller\AdminStaticPageController;
 use App\Controller\AdminSubscriberController;
 use App\Controller\ModerateNoteController;
 use App\Controller\AdminOptionController;
@@ -43,6 +44,11 @@ $router->addPost('/subscribe/update', SubscribeController::class . '@update');
 $router->addGet('/subscribe/delete/*', SubscribeController::class . '@delete');
 
 $router->addGet('/static/*', StaticPageController::class . '@show');
+$router->addGet('/admin/static/update/*', AdminStaticPageController::class . '@show');
+$router->addPost('/admin/static/update/*', AdminStaticPageController::class . '@update');
+$router->addGet('/admin/static/delete/*', AdminStaticPageController::class . '@delete');
+$router->addGet('/admin/static/new', AdminStaticPageController::class . '@new');
+$router->addPost('/admin/static/new', AdminStaticPageController::class . '@create');
 
 $router->addGet('/admin/users', AdminUserController::class . '@index');
 $router->addPost('/admin/users/update', AdminUserController::class . '@update');

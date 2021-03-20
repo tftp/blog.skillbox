@@ -20,6 +20,8 @@ class NoteController extends PrivateController
 
         $notes = Note::orderBy('create_time', 'desc')->skip($notesOnPage * ($page - 1))->take($notesOnPage)->get();
 
+        $_SESSION['aliases'] = $config->get('aliases');
+
         return new View('notes.index', ['title' => 'Список статей', 'notes' => $notes, 'countPages' => $countPages]);
     }
 

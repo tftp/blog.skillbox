@@ -12,6 +12,19 @@
                 <a class="nav-link active" href="/users/<?= $_SESSION['user']->id; ?>">Мой профиль</a>
             <?php endif; ?>
         </li>
+
+        <?php if ($aliases) { ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Информация
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php foreach($aliases as $id => $alias) { ?>
+                        <a class="dropdown-item" href="/static/<?= $id; ?>"><?= $alias; ?></a>
+                    <?php } ?>
+                </div>
+            </li>
+        <?php } ?>
     </ul>
 
     <ul class="nav justify-content-end">

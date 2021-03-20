@@ -1,3 +1,5 @@
+<?php $aliases = $_SESSION['aliases']; ?>
+
 <!doctype html>
 <html lang="en">
   <head>

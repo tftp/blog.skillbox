@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\View;
 use App\Config;
+use App\Model\Page;
 use App\Exception\NotFoundException;
 
 class StaticPageController extends PrivateController
@@ -15,8 +16,14 @@ class StaticPageController extends PrivateController
         if ($param == 'terms') {
             $terms = $config->get('terms');
             return new View('static.terms', ['terms' => $terms]);
-        } else {
-            throw new NotFoundException();
         }
+
+        $page = Page::find($param);
+
+        if ($page) {
+            return new View('static.template', ['page' => $page, 'title' => $page->title]);
+        }
+
+        throw new NotFoundException();
     }
 }

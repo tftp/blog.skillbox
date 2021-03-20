@@ -55,3 +55,13 @@ function getCommentsForPagination($notesOnPage, $page){
 
     return $comments;
 }
+
+function getStaticPageAliases(){
+    $pages = App\Model\Page::all();
+    $aliases = [];
+
+    foreach ($pages as $page) {
+        $aliases[$page->id] = $page->alias;
+    }
+    return $aliases;
+}
