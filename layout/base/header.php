@@ -1,3 +1,5 @@
+<?php $aliases = $_SESSION['aliases']; ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,7 +9,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
+    <title><?= $title ?? 'Мой блог' ?></title>
+    <script src="/js/scripts.js" defer=""></script>
   </head>
   <body>
+    <h1><a href="/">Мой блог</a></h1>

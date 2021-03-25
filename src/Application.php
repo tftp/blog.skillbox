@@ -9,7 +9,6 @@ class Application
 
     public function __construct(Router $router)
     {
-
         $this->initialize();
         $this->router = $router;
     }
@@ -29,7 +28,6 @@ class Application
         } else {
             echo $view;
         }
-
     }
 
     public function renderException($e)
@@ -40,6 +38,7 @@ class Application
             $message = $e->getMessage();
             $code = $e->getCode();
 
+            http_response_code(500);
             echo $message . PHP_EOL;
             echo "Код ошибки " . ($code ? $code : "500") . PHP_EOL;
         }
@@ -63,5 +62,7 @@ class Application
 
         $capsule->setAsGlobal();
         $capsule->bootEloquent();
+
+        $config->set('aliases', getStaticPageAliases());
     }
 }

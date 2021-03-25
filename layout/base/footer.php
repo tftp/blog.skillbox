@@ -1,3 +1,6 @@
+    <div class="card-footer text-muted">
+        <p align="center">&copy;<?= date('Y'); ?> Все права защищены</p>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
