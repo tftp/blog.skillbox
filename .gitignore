@@ -1,4 +1,5 @@
 /images
+/vendor
+.idea
 test.php
-
 /logs
